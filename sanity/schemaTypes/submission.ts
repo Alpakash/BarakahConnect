@@ -43,10 +43,5 @@ export const submissionType = defineType({
       title: 'Gekozen Pakket',
       type: 'string',
     }),
-    defineField({
-      name: 'message',
-      title: 'Bericht',
-      type: 'text',
-    }),
   ],
 })

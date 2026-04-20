@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { urlFor } from '@/sanity/lib/image';
+import Logo from './Logo';
 
 export default function HomeSections({ sections, hideItemHeaders }: { sections: any[], hideItemHeaders?: boolean }) {
   if (!sections || sections.length === 0) return null;
@@ -51,7 +52,9 @@ export default function HomeSections({ sections, hideItemHeaders }: { sections: 
                             className="object-contain p-12 drop-shadow-sm"
                           />
                         ) : (
-                           <div className="w-full h-full bg-stone-100 flex items-center justify-center text-emerald-800/20 text-8xl">🖼️</div>
+                           <div className="w-full h-full flex items-center justify-center">
+                             <Logo className="w-full h-full p-12" />
+                           </div>
                         )}
                       </div>
                     </div>
