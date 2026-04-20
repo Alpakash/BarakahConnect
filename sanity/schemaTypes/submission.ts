@@ -35,9 +35,18 @@ export const submissionType = defineType({
     }),
     defineField({
       name: 'eventTitle',
-      title: 'Aangemeld voor Bijeenkomst',
+      title: 'Betreft Bijeenkomst',
       type: 'string',
-      readOnly: true,
+    }),
+    defineField({
+      name: 'packageName',
+      title: 'Gekozen Pakket',
+      type: 'string',
+    }),
+    defineField({
+      name: 'message',
+      title: 'Bericht',
+      type: 'text',
     }),
   ],
 })

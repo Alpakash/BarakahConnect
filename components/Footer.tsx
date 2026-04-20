@@ -27,7 +27,7 @@ export default function Footer() {
             <ul className="space-y-4">
               <li><Link href="/over-ons" className="hover:text-emerald-500 transition-colors">Over ons</Link></li>
               <li><Link href="/bijeenkomsten" className="hover:text-emerald-500 transition-colors">Bijeenkomsten</Link></li>
-              <li><Link href="/aanmelden" className="hover:text-emerald-500 transition-colors">Word lid</Link></li>
+              <li><Link href="/lid-worden" className="hover:text-emerald-500 transition-colors">Pakketten</Link></li>
               <li><Link href="/contact" className="hover:text-emerald-500 transition-colors">Contact</Link></li>
             </ul>
           </div>
@@ -38,6 +38,10 @@ export default function Footer() {
               <li className="flex items-center gap-3 text-stone-400 hover:text-emerald-500 transition-colors">
                 <span className="text-lg">✉</span>
                 <a href="mailto:info@barakahconnect.nl">info@barakahconnect.nl</a>
+              </li>
+              <li className="flex items-center gap-3 text-stone-400 hover:text-emerald-500 transition-colors">
+                <span className="text-lg">📞</span>
+                <a href="tel:+31613687860">+31 6 13687860</a>
               </li>
               <li className="flex items-center gap-3 text-stone-400">
                 <span className="text-lg">📍</span>

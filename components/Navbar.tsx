@@ -13,6 +13,7 @@ export default function Navbar() {
             <Link href="/" className="text-stone-600 hover:text-emerald-700 font-medium transition-colors">Home</Link>
             <Link href="/over-ons" className="text-stone-600 hover:text-emerald-700 font-medium transition-colors">Over ons</Link>
             <Link href="/bijeenkomsten" className="text-stone-600 hover:text-emerald-700 font-medium transition-colors">Bijeenkomsten</Link>
+            <Link href="/lid-worden" className="text-stone-600 hover:text-emerald-700 font-medium transition-colors">Pakketten</Link>
             <Link href="/contact" className="text-stone-600 hover:text-emerald-700 font-medium transition-colors">Contact</Link>
           </div>
           <div className="flex items-center gap-4">

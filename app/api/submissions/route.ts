@@ -13,11 +13,13 @@ export async function POST(req: Request) {
     // Save to Sanity
     const doc = {
       _type: 'submission',
-      name,
-      email,
-      message: message || '',
-      type,
-      eventTitle: eventTitle || undefined,
+      name: body.name,
+      email: body.email,
+      message: body.message,
+      eventTitle: body.eventTitle,
+      packageName: body.packageName,
+      type: body.type,
+      submittedAt: new Date().toISOString(),
     };
 
     await client.create(doc);

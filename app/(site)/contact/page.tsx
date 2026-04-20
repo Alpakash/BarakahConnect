@@ -36,6 +36,15 @@ export default function Contact() {
                   <p className="text-stone-500">Regio Nederland</p>
                 </div>
               </div>
+              <div className="flex items-start gap-5">
+                <div className="bg-emerald-50 text-emerald-800 p-4 rounded-xl">
+                  <span className="text-2xl">📞</span>
+                </div>
+                <div className="pt-1">
+                  <h3 className="font-serif text-lg font-medium text-stone-900 mb-1">Telefoon</h3>
+                  <a href="tel:+31613687860" className="text-stone-500 hover:text-emerald-700 transition-colors">+31 6 13687860</a>
+                </div>
+              </div>
             </div>
           </div>
           

@@ -77,6 +77,34 @@ export const homePageType = defineType({
           fields: [
             { name: 'caption', type: 'string', title: 'Onderschrift', options: { isHighlighted: true } }
           ]
+        },
+        // Membership / Pricing Section
+        {
+          type: 'object',
+          name: 'membershipSection',
+          title: 'Lidmaatschap / Pakketten',
+          fields: [
+            defineField({ name: 'title', type: 'string', title: 'Sectie Titel' }),
+            defineField({ name: 'description', type: 'text', title: 'Beschrijving' }),
+            defineField({
+              name: 'plans',
+              type: 'array',
+              title: 'Pakketten',
+              of: [{
+                type: 'object',
+                name: 'plan',
+                fields: [
+                  { name: 'name', type: 'string', title: 'Naam Pakket' },
+                  { name: 'price', type: 'string', title: 'Prijs (bijv. €60 of Op aanvraag)' },
+                  { name: 'priceSubtext', type: 'string', title: 'Subtekst Prijs (bijv. per 2 beurten)' },
+                  { name: 'features', type: 'array', title: 'Kenmerken/Vinkjes', of: [{ type: 'string' }] },
+                  { name: 'buttonText', type: 'string', title: 'Tekst op knop' },
+                  { name: 'buttonLink', type: 'string', title: 'Link (bijv. /aanmelden of /contact)' },
+                  { name: 'isPopular', type: 'boolean', title: 'Markeren als populair/uitgelicht' }
+                ]
+              }]
+            })
+          ]
         }
       ]
     })

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { urlFor } from '@/sanity/lib/image';
 
-export default function HomeSections({ sections }: { sections: any[] }) {
+export default function HomeSections({ sections, hideItemHeaders }: { sections: any[], hideItemHeaders?: boolean }) {
   if (!sections || sections.length === 0) return null;
 
   return (
@@ -136,6 +136,88 @@ export default function HomeSections({ sections }: { sections: any[] }) {
                          <p className="text-lg font-light tracking-wide">{section.caption}</p>
                        </div>
                     )}
+                  </div>
+                </div>
+              </section>
+            );
+
+          case 'membershipSection':
+            return (
+              <section key={section._key || index} className="py-32 bg-white relative">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                  {!hideItemHeaders && (
+                    <div className="text-center max-w-2xl mx-auto mb-24">
+                      <h2 className="font-serif text-4xl md:text-5xl text-stone-900 mb-8 font-medium">{section.title}</h2>
+                      <p className="text-stone-500 text-lg leading-relaxed font-light">{section.description}</p>
+                    </div>
+                  )}
+
+                  <div className="grid lg:grid-cols-3 gap-10 items-stretch">
+                    {section.plans?.map((plan: any, i: number) => (
+                      <div 
+                        key={plan._key || i} 
+                        className={`group relative flex flex-col p-10 rounded-[2rem] transition-all duration-700 border ${
+                          plan.isPopular 
+                            ? 'bg-emerald-900 text-white border-emerald-800 shadow-2xl scale-105 z-20' 
+                            : 'bg-white text-stone-900 border-stone-100 hover:border-emerald-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.04)] '
+                        }`}
+                      >
+                        {plan.isPopular && (
+                          <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 text-stone-900 px-6 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-[0_4px_20px_rgba(212,175,55,0.3)]">
+                            Meest gekozen
+                          </div>
+                        )}
+
+                        <div className="mb-10 text-center">
+                          <h3 className={`font-serif text-2xl font-medium mb-6 ${plan.isPopular ? 'text-white' : 'text-stone-900'}`}>
+                            {plan.name}
+                          </h3>
+                          <div className="flex flex-col items-center justify-center">
+                             <span className={`text-5xl font-bold tracking-tight mb-1 ${plan.isPopular ? 'text-white' : 'text-stone-900'}`}>{plan.price}</span>
+                             {plan.priceSubtext && (
+                               <span className={`text-sm tracking-wide font-medium uppercase opacity-60 ${plan.isPopular ? 'text-amber-200' : 'text-stone-500'}`}>
+                                 {plan.priceSubtext}
+                               </span>
+                             )}
+                          </div>
+                        </div>
+
+                        <div className={`w-full h-px mb-10 ${plan.isPopular ? 'bg-emerald-800' : 'bg-stone-50'}`}></div>
+
+                        <ul className="space-y-5 mb-12 flex-grow">
+                          {plan.features?.map((feature: string, j: number) => (
+                            <li key={j} className="flex items-start gap-4 text-left">
+                              <svg className="flex-shrink-0 w-5 h-5 mt-0.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                              </svg>
+                              <span className={`text-base leading-relaxed ${plan.isPopular ? 'text-emerald-50' : 'text-stone-600'} font-light`}>
+                                {feature}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+
+                        {(() => {
+                          const baseUrl = plan.buttonLink || '/contact';
+                          const finalHref = baseUrl.includes('package=') 
+                            ? baseUrl 
+                            : `${baseUrl}${baseUrl.includes('?') ? '&' : '?'}package=${encodeURIComponent(plan.name)}`;
+                          
+                          return (
+                            <Link 
+                              href={finalHref} 
+                              className={`w-full py-5 rounded-2xl font-semibold text-base text-center transition-all duration-300 ${
+                                plan.isPopular 
+                                  ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-stone-900 hover:from-amber-400 hover:to-amber-500 shadow-[0_10px_20px_rgba(212,175,55,0.2)]' 
+                                  : 'bg-emerald-700 text-white hover:bg-emerald-800 shadow-lg'
+                              } active:scale-[0.98]`}
+                            >
+                              {plan.buttonText || 'Meld je aan'}
+                            </Link>
+                          );
+                        })()}
+                      </div>
+                    ))}
                   </div>
                 </div>
               </section>

@@ -24,7 +24,7 @@ async function seed() {
 
   // We overschrijven de bestaande homePage om naar het nieuwe sections model te gaan
   const homeDoc = await client.fetch(`*[_type == "homePage"][0]`)
-  
+
   const homeData = {
     _type: 'homePage',
     sections: [
@@ -65,6 +65,64 @@ async function seed() {
             emoji: '🌙',
             title: 'Voor iedereen',
             text: 'Broeders en zusters komen samen in aparte, comfortabele groepen. En ook niet-moslims zijn meer dan welkom om de barakah te ervaren.'
+          }
+        ]
+      },
+      {
+        _type: 'membershipSection',
+        _key: 'membership-1',
+        title: 'Pakketten',
+        description: 'Word onderdeel van een krachtig netwerk. Kies het pakket dat het beste past bij jouw fase als ondernemer.',
+        plans: [
+          {
+            _key: 'plan-proef',
+            name: 'Proefpakket',
+            price: '€60',
+            priceSubtext: 'voor 2 beurten',
+            features: [
+              '2x netwerkontbijt',
+              'Kennismaking met de groep',
+              'Toegang tot kansen',
+              'Samenwerkingen ontdekken',
+              'Geschikt voor werkzoekenden'
+            ],
+            buttonText: 'Direct aanmelden',
+            buttonLink: '/aanmelden?package=Proefpakket'
+          },
+          {
+            _key: 'plan-basis',
+            name: 'Basispakket',
+            price: 'Op aanvraag',
+            priceSubtext: 'per maand',
+            features: [
+              '1x per maand netwerkontbijt',
+              'Toegang tot vaste ondernemersgroep',
+              'Mogelijkheid om gasten uit te nodigen',
+              'Netwerken & connecties',
+              'Toegang tot kansen',
+              'Samenwerkingen tussen leden'
+            ],
+            buttonText: 'Bespreek mogelijkheden',
+            buttonLink: '/contact',
+            isPopular: true
+          },
+          {
+            _key: 'plan-premium',
+            name: 'Premium pakket',
+            price: 'Op aanvraag',
+            priceSubtext: 'full experience',
+            features: [
+              'Alle basis voordelen',
+              'Actieve introducties tussen leden',
+              'Samenwerkingen stimuleren',
+              'Toegang tot serieuze ondernemers',
+              'Gezamenlijke investeringsmogelijkheden',
+              'Zakendoen in vertrouwde omgeving',
+              'WhatsApp / community groep',
+              'Gastsprekers over Islamitisch financieren'
+            ],
+            buttonText: 'Neem contact op',
+            buttonLink: '/contact'
           }
         ]
       }

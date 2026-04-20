@@ -2,10 +2,12 @@
 
 import { useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
+import Link from 'next/link'
 
 function FormInner({ type }: { type: 'Aanmelding Bijeenkomst' | 'Contact' }) {
   const searchParams = useSearchParams();
   const eventTitle = searchParams.get('event');
+  const packageName = searchParams.get('package');
 
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -20,6 +22,7 @@ function FormInner({ type }: { type: 'Aanmelding Bijeenkomst' | 'Contact' }) {
       email: formData.get('email'),
       message: formData.get('message'),
       eventTitle: formData.get('eventTitle'), // Hidden field
+      packageName: formData.get('packageName'), // Added package support
       type,
     };
 
@@ -67,9 +70,32 @@ function FormInner({ type }: { type: 'Aanmelding Bijeenkomst' | 'Contact' }) {
         <div className="space-y-4">
           {type === 'Aanmelding Bijeenkomst' && eventTitle && (
             <div className="bg-emerald-50/80 border border-emerald-100 p-4 rounded-md mb-6">
-              <p className="text-sm text-emerald-800 font-medium">Geselecteerde bijeenkomst:</p>
+              <p className="text-xs text-emerald-700 font-bold uppercase tracking-wider mb-1">Geselecteerde bijeenkomst:</p>
               <p className="text-emerald-900 font-serif text-lg">{eventTitle}</p>
               <input type="hidden" name="eventTitle" value={eventTitle} />
+            </div>
+          )}
+
+          {packageName && (
+            <div className="bg-stone-50 border-l-4 border-emerald-700 p-4 mb-10 flex justify-between items-center rounded-r-lg">
+              <div className="flex items-center gap-3">
+                <svg className="w-5 h-5 text-emerald-700" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <div className="flex flex-col gap-1">
+                  <span className="text-[10px] text-stone-400 font-bold uppercase tracking-widest">Geselecteerd lidmaatschap</span>
+                  <div className="flex items-center flex-wrap gap-x-2">
+                    <span className="font-serif text-lg md:text-xl text-stone-900 whitespace-nowrap leading-none">{packageName}</span>
+                    <span className="text-emerald-700 font-medium text-sm whitespace-nowrap">
+                      ({packageName === 'Proefpakket' ? '€60' : 'Prijs op aanvraag'})
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <Link href="/lid-worden" className="text-xs text-stone-400 hover:text-emerald-700 underline underline-offset-4 tracking-wide">
+                Wijzig
+              </Link>
+              <input type="hidden" name="packageName" value={packageName} />
             </div>
           )}
 
