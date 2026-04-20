@@ -43,5 +43,11 @@ export const submissionType = defineType({
       title: 'Gekozen Pakket',
       type: 'string',
     }),
+    defineField({
+      name: 'submittedAt',
+      title: 'Ingezonden op',
+      type: 'datetime',
+      readOnly: true,
+    }),
   ],
 })
