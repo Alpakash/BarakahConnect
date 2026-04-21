@@ -84,7 +84,7 @@ async function seed() {
               'Kennismaking met de groep',
               'Toegang tot kansen',
               'Samenwerkingen ontdekken',
-              'Geschikt voor werkzoekenden'
+              'Geschikt voor ondernemers & werkzoekenden'
             ],
             buttonText: 'Direct aanmelden',
             buttonLink: '/aanmelden?package=Proefpakket'
