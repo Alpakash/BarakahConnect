@@ -4,6 +4,14 @@ export const homePageType = defineType({
   name: 'homePage',
   title: 'Pagina: Home',
   type: 'document',
+  preview: {
+    prepare() {
+      return {
+        title: 'Homepagina',
+        subtitle: 'Bouw de pagina op in secties'
+      }
+    }
+  },
   fields: [
     defineField({
       name: 'sections',
@@ -111,6 +119,18 @@ export const homePageType = defineType({
           type: 'object',
           name: 'richTextSection',
           title: 'Vrije Tekst (Uitgebreid)',
+          preview: {
+            select: {
+              content: 'content'
+            },
+            prepare({ content }: any) {
+              const text = (content || []).filter((b: any) => b._type === 'block' && b.children).map((b: any) => b.children.map((c: any) => c.text).join('')).join(' ') || 'Lege tekst sectie'
+              return {
+                title: text.length > 40 ? text.substring(0, 40) + '...' : text,
+                subtitle: 'Vrije Tekst'
+              }
+            }
+          },
           fields: [
             {
               name: 'content',
