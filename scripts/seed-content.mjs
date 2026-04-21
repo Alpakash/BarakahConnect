@@ -22,10 +22,11 @@ const client = createClient({
 async function seed() {
   console.log('🌱 Seeding Sanity content (Builder Mode)...\n')
 
-  // We overschrijven de bestaande homePage om naar het nieuwe sections model te gaan
-  const homeDoc = await client.fetch(`*[_type == "homePage"][0]`)
+  // We overschrijven de bestaande homePage of maken een nieuwe aan via de vaste singleton ID
+  const homeDoc = await client.fetch(`*[_type == "homePage" && _id == "mainHomePage"][0]`)
 
   const homeData = {
+    _id: 'mainHomePage',
     _type: 'homePage',
     sections: [
       {

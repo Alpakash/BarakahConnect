@@ -2,6 +2,24 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { urlFor } from '@/sanity/lib/image';
 import Logo from './Logo';
+import { PortableText } from '@portabletext/react';
+
+const ptComponents = {
+  block: {
+    normal: ({children}: any) => <p className="mb-6">{children}</p>,
+    h2: ({children}: any) => <h2 className="text-3xl md:text-4xl font-serif text-stone-900 mb-6 mt-12">{children}</h2>,
+    h3: ({children}: any) => <h3 className="text-2xl font-serif text-stone-900 mb-4 mt-8">{children}</h3>,
+    blockquote: ({children}: any) => <blockquote className="border-l-4 border-emerald-700 pl-6 italic my-8 text-stone-700 text-xl">{children}</blockquote>,
+  },
+  marks: {
+    strong: ({children}: any) => <strong className="font-semibold text-stone-900">{children}</strong>,
+    link: ({value, children}: any) => <a href={value?.href} className="text-emerald-700 underline underline-offset-2 hover:text-emerald-900 transition-colors">{children}</a>,
+  },
+  list: {
+    bullet: ({children}: any) => <ul className="list-disc pl-6 mb-6 space-y-2 marker:text-emerald-700">{children}</ul>,
+    number: ({children}: any) => <ol className="list-decimal pl-6 mb-6 space-y-2 marker:text-stone-500 font-medium">{children}</ol>,
+  }
+};
 
 export default function HomeSections({ sections, hideItemHeaders }: { sections: any[], hideItemHeaders?: boolean }) {
   if (!sections || sections.length === 0) return null;
@@ -72,6 +90,17 @@ export default function HomeSections({ sections, hideItemHeaders }: { sections: 
                   <p className="text-lg md:text-xl text-stone-600 max-w-4xl mx-auto leading-relaxed mb-12 min-h-[50px]">
                     {section.text}
                   </p>
+                </div>
+              </section>
+            );
+
+          case 'richTextSection':
+            return (
+              <section key={section._key || index} className="py-16 md:py-24 bg-white relative overflow-hidden">
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                  <div className="text-lg md:text-xl text-stone-600 leading-relaxed font-light">
+                    <PortableText value={section.content} components={ptComponents} />
+                  </div>
                 </div>
               </section>
             );

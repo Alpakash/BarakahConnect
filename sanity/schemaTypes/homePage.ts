@@ -105,6 +105,20 @@ export const homePageType = defineType({
               }]
             })
           ]
+        },
+        // Rich Text Section
+        {
+          type: 'object',
+          name: 'richTextSection',
+          title: 'Vrije Tekst (Uitgebreid)',
+          fields: [
+            {
+              name: 'content',
+              type: 'array',
+              title: 'Inhoud',
+              of: [{ type: 'block' }]
+            }
+          ]
         }
       ]
     })
