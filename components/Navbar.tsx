@@ -1,9 +1,28 @@
-import Link from 'next/link'
-import Logo from './Logo'
+'use client';
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Logo from './Logo';
 
 export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <nav className="sticky top-0 z-50 w-full bg-white border-b border-stone-200 shadow-sm transition-all">
+    <nav 
+      className={`sticky top-0 z-50 w-full transition-all duration-300 border-b ${
+        scrolled 
+          ? 'bg-white/85 backdrop-blur-md border-stone-200/50 shadow-sm py-0' 
+          : 'bg-white border-stone-200 py-1'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20 md:h-24">
           <Link href="/" className="flex items-center h-full py-3 shrink-0 group">
