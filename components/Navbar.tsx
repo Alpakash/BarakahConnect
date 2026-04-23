@@ -9,19 +9,18 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 40);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <nav 
-      className={`sticky top-0 z-50 w-full transition-all duration-300 border-b ${
-        scrolled 
-          ? 'bg-white/95 backdrop-blur-lg border-stone-200 shadow-sm py-0' 
-          : 'bg-white border-transparent py-1'
-      }`}
+    <nav
+      className={`sticky top-0 z-50 w-full transition-all duration-300 border-b ${scrolled
+        ? 'bg-white/50 backdrop-blur-lg border-stone-200 shadow-sm py-0'
+        : 'bg-white border-transparent py-1'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20 md:h-24">
