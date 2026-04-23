@@ -2,7 +2,12 @@ import EventCard from "@/components/EventCard";
 import { client } from "@/sanity/client";
 
 export const metadata = {
-  title: 'Bijeenkomsten | Barakah Connect',
+  title: 'Bijeenkomsten',
+  description: 'Sluit je aan bij onze tweewekelijkse bijeenkomsten en ontbijtsessies. Breid je netwerk uit, deel kennis en versterk elkaar.',
+  openGraph: {
+    title: 'Bijeenkomsten | Barakah Connect',
+    description: 'Sluit je aan bij onze tweewekelijkse bijeenkomsten en ontbijtsessies. Breid je netwerk uit en deel kennis met gelijkgestemden.',
+  }
 }
 
 export default async function Bijeenkomsten() {

@@ -4,7 +4,12 @@ import { urlFor } from '@/sanity/lib/image';
 import { draftMode } from 'next/headers';
 
 export const metadata = {
-  title: 'Over Ons | Barakah Connect',
+  title: 'Over Ons',
+  description: 'Lees over de missie en visie van Barakah Connect. Ontdek hoe we broeders en zusters samenbrengen en ondersteunen in kennis en ondernemerschap.',
+  openGraph: {
+    title: 'Over Ons | Barakah Connect',
+    description: 'Lees over de missie en visie van Barakah Connect. Ontdek hoe we broeders en zusters samenbrengen.',
+  }
 }
 
 export const revalidate = 60;

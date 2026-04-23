@@ -3,8 +3,12 @@ import { draftMode } from 'next/headers';
 import HomeSections from '@/components/HomeSections';
 
 export const metadata = {
-  title: 'Pakketten | Barakah Connect',
-  description: 'Ontdek onze lidmaatschappen en word onderdeel van de Barakah Connect community.',
+  title: 'Pakketten',
+  description: 'Ontdek onze lidmaatschappen. Kies het pakket dat bij jouw doelen past en word onderdeel van de Barakah Connect community.',
+  openGraph: {
+    title: 'Pakketten | Barakah Connect',
+    description: 'Ontdek onze lidmaatschappen. Kies het pakket dat bij jouw doelen past en word onderdeel van de Barakah Connect community.',
+  }
 }
 
 export default async function LidWorden() {

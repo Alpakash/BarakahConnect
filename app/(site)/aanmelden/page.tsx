@@ -1,7 +1,12 @@
 import SubmissionForm from "@/components/SubmissionForm";
 
 export const metadata = {
-  title: 'Aanmelden | Barakah Connect',
+  title: 'Aanmelden',
+  description: 'Meld je aan voor het Barakah Connect netwerk en blijf op de hoogte van onze aankomende bijeenkomsten en activiteiten.',
+  openGraph: {
+    title: 'Aanmelden | Barakah Connect',
+    description: 'Meld je aan voor het Barakah Connect netwerk en ontmoet gelijkgestemden.',
+  }
 }
 
 export default function Aanmelden() {

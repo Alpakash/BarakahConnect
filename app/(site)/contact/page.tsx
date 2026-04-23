@@ -1,7 +1,12 @@
 import SubmissionForm from "@/components/SubmissionForm";
 
 export const metadata = {
-  title: 'Contact | Barakah Connect',
+  title: 'Contact',
+  description: 'Neem contact op met Barakah Connect voor vragen, samenwerkingen of meer informatie. We beantwoorden je bericht zo snel mogelijk.',
+  openGraph: {
+    title: 'Contact | Barakah Connect',
+    description: 'Neem contact op met Barakah Connect voor vragen, samenwerkingen of meer informatie.',
+  }
 }
 
 export default function Contact() {
