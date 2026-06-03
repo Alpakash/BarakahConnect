@@ -1,4 +1,5 @@
 import SubmissionForm from "@/components/SubmissionForm";
+import WeeztixShop from "@/components/WeeztixShop";
 
 export const metadata = {
   title: 'Aanmelden',
@@ -22,6 +23,15 @@ export default function Aanmelden() {
         
         <div className="bg-white rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-stone-100 p-8 md:p-12">
           <SubmissionForm type="Aanmelding Bijeenkomst" />
+        </div>
+
+        <div className="mt-16 pt-12 border-t border-stone-200">
+          <h2 className="font-serif text-3xl md:text-4xl mb-4 text-stone-900 text-center">Of koop direct je tickets</h2>
+          <p className="text-center text-stone-500 mb-8 max-w-xl mx-auto text-lg leading-relaxed">
+            Bestel hier eenvoudig je tickets voor onze aankomende bijeenkomsten via Weeztix.
+          </p>
+          <div className="w-24 h-1 bg-emerald-700 mx-auto mb-12 opacity-50"></div>
+          <WeeztixShop />
         </div>
       </div>
     </div>
