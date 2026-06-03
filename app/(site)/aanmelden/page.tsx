@@ -1,5 +1,5 @@
 import SubmissionForm from "@/components/SubmissionForm";
-import WeeztixShop from "@/components/WeeztixShop";
+import WeeztixModal from "@/components/WeeztixModal";
 
 export const metadata = {
   title: 'Aanmelden',
@@ -31,7 +31,7 @@ export default function Aanmelden() {
             Bestel hier eenvoudig je tickets voor onze aankomende bijeenkomsten via Weeztix.
           </p>
           <div className="w-24 h-1 bg-emerald-700 mx-auto mb-12 opacity-50"></div>
-          <WeeztixShop />
+          <WeeztixModal />
         </div>
       </div>
     </div>
