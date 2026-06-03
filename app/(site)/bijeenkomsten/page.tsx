@@ -1,5 +1,4 @@
 import EventCard from "@/components/EventCard";
-import WeeztixModal from "@/components/WeeztixModal";
 import { client } from "@/sanity/client";
 
 export const metadata = {
@@ -44,14 +43,6 @@ export default async function Bijeenkomsten() {
           </div>
         )}
 
-        <div className="mt-20 pt-16 border-t border-stone-200">
-          <h2 className="font-serif text-3xl md:text-4xl mb-4 text-stone-900 text-center">Koop je tickets</h2>
-          <p className="text-center text-stone-500 mb-8 max-w-xl mx-auto text-lg leading-relaxed">
-            Bestel hier eenvoudig je tickets voor onze aankomende bijeenkomsten.
-          </p>
-          <div className="w-24 h-1 bg-emerald-700 mx-auto mb-12 opacity-50"></div>
-          <WeeztixModal />
-        </div>
       </div>
     </div>
   )

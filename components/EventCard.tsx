@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { urlFor } from '../sanity/lib/image'
 import Link from 'next/link'
+import WeeztixModal from './WeeztixModal'
 
 export default function EventCard({ event }: { event: any }) {
   const isTBD = !event.date;
@@ -57,6 +58,7 @@ export default function EventCard({ event }: { event: any }) {
         >
           Meld je aan
         </Link>
+        <WeeztixModal compact />
       </div>
     </div>
   )

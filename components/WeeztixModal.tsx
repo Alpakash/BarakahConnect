@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import WeeztixShop from './WeeztixShop';
 
-export default function WeeztixModal() {
+export default function WeeztixModal({ compact }: { compact?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const open = useCallback(() => setIsOpen(true), []);
@@ -34,16 +34,20 @@ export default function WeeztixModal() {
   return (
     <>
       {/* Trigger button */}
-      <div className="text-center">
+      <div className={compact ? '' : 'text-center'}>
         <button
           onClick={open}
-          className="bg-emerald-700 hover:bg-emerald-800 px-10 py-4 rounded-lg font-medium text-white shadow-lg transition-all inline-flex items-center gap-2 hover:-translate-y-0.5 text-lg"
+          className={
+            compact
+              ? 'inline-flex items-center justify-center w-full bg-emerald-700 hover:bg-emerald-800 text-white font-medium py-3 rounded transition-all gap-2 mt-3'
+              : 'bg-emerald-700 hover:bg-emerald-800 px-10 py-4 rounded-lg font-medium text-white shadow-lg transition-all inline-flex items-center gap-2 hover:-translate-y-0.5 text-lg'
+          }
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
             <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
             <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
           </svg>
-          Koop je tickets
+          Koop tickets
         </button>
       </div>
 
