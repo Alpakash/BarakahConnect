@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { draftMode } from "next/headers";
 import VisualEditingWrapper from "@/components/VisualEditingWrapper";
+import MetaPixel from "@/components/MetaPixel";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -62,6 +63,7 @@ export default async function SiteLayout({
       className={`${inter.variable} ${playfair.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans selection:bg-emerald-100 selection:text-emerald-900">
+        <MetaPixel />
         <Navbar />
         <main className="flex-grow flex flex-col">{children}</main>
         <Footer />
