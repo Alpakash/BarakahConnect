@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { draftMode } from "next/headers";
 import VisualEditingWrapper from "@/components/VisualEditingWrapper";
 import MetaPixel from "@/components/MetaPixel";
+import TikTokPixel from "@/components/TikTokPixel";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -64,6 +65,7 @@ export default async function SiteLayout({
     >
       <body className="min-h-full flex flex-col font-sans selection:bg-emerald-100 selection:text-emerald-900">
         <MetaPixel />
+        <TikTokPixel />
         <Navbar />
         <main className="flex-grow flex flex-col">{children}</main>
         <Footer />
