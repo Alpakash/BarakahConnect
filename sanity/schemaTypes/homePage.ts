@@ -114,6 +114,42 @@ export const homePageType = defineType({
             })
           ]
         },
+        // Promo Video Section (uitnodigingsvideo van een gast, portret-formaat)
+        {
+          type: 'object',
+          name: 'promoVideoSection',
+          title: 'Uitnodigingsvideo (Gast)',
+          fields: [
+            { name: 'guest', title: 'Gast', type: 'reference', to: [{ type: 'speaker' }] },
+            { name: 'title', type: 'string', title: 'Titel (optioneel)' },
+            { name: 'text', type: 'text', title: 'Tekst (optioneel)' },
+            { name: 'buttonText', type: 'string', title: 'Tekst op knop', initialValue: 'Meld je aan' },
+            { name: 'buttonLink', type: 'string', title: 'Link knop', initialValue: '/bijeenkomsten' },
+            {
+              name: 'mediaPosition',
+              title: 'Video links of rechts',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Links', value: 'left' },
+                  { title: 'Rechts', value: 'right' },
+                ],
+                layout: 'radio',
+              },
+              initialValue: 'left',
+            },
+          ],
+          preview: {
+            select: { title: 'title', guestName: 'guest.name', media: 'guest.photo' },
+            prepare({ title, guestName, media }: any) {
+              return {
+                title: title || guestName || 'Uitnodigingsvideo',
+                subtitle: guestName ? `Gast: ${guestName}` : 'Uitnodigingsvideo',
+                media,
+              }
+            },
+          },
+        },
         // Rich Text Section
         {
           type: 'object',

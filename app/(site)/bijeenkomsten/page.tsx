@@ -1,4 +1,5 @@
 import EventCard from "@/components/EventCard";
+import PromoVideoBlock from "@/components/PromoVideoBlock";
 import { client } from "@/sanity/client";
 
 export const metadata = {
@@ -17,6 +18,12 @@ export default async function Bijeenkomsten() {
     { next: { revalidate: 60 } }
   );
 
+  const guests = await client.fetch(
+    `*[_type == "speaker"] | order(_createdAt asc){ _id, name, role, bio, photo, video{ asset-> { url } }, socialLink }`,
+    {},
+    { next: { revalidate: 60 } }
+  );
+
   return (
     <div className="py-24 bg-stone-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,7 +32,7 @@ export default async function Bijeenkomsten() {
           Sluit je aan bij onze tweewekelijkse ontbijtsessies. Kom om te netwerken, kennis te delen, of gewoon voor een goed gesprek en lekker eten.
         </p>
         <div className="w-24 h-1 bg-emerald-700 mx-auto mb-16 opacity-50"></div>
-        
+
         {events && events.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {events.map((evt: any) => (
@@ -37,9 +44,25 @@ export default async function Bijeenkomsten() {
             <div className="text-6xl mb-6 opacity-30">🗓</div>
             <h3 className="font-serif text-2xl text-stone-800 mb-4">Agenda wordt nog bijgewerkt</h3>
             <p className="text-stone-500 text-lg leading-relaxed">
-              De datums en details van de volgende bijeenkomsten worden momenteel afgestemd. 
+              De datums en details van de volgende bijeenkomsten worden momenteel afgestemd.
               Zodra deze gereed zijn, verschijnen ze hier op de pagina.
             </p>
+          </div>
+        )}
+
+        {guests && guests.length > 0 && (
+          <div className="mt-28 space-y-24">
+            {guests.map((guest: any, i: number) => (
+              <PromoVideoBlock
+                key={guest._id}
+                guest={guest}
+                title={`${guest.name} nodigt je uit`}
+                text={guest.bio}
+                buttonText="Meld je aan"
+                buttonLink="/aanmelden"
+                mediaPosition={i % 2 === 0 ? 'left' : 'right'}
+              />
+            ))}
           </div>
         )}
 

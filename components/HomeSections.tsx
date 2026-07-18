@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { urlFor } from '@/sanity/lib/image';
 import Logo from './Logo';
+import PromoVideoBlock from './PromoVideoBlock';
 import { PortableText } from '@portabletext/react';
 
 const ptComponents = {
@@ -169,6 +170,22 @@ export default function HomeSections({ sections, hideItemHeaders }: { sections: 
                        </div>
                     )}
                   </div>
+                </div>
+              </section>
+            );
+
+          case 'promoVideoSection':
+            return (
+              <section key={section._key || index} className="py-24 bg-white relative overflow-hidden">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <PromoVideoBlock
+                    guest={section.guest}
+                    title={section.title}
+                    text={section.text}
+                    buttonText={section.buttonText}
+                    buttonLink={section.buttonLink}
+                    mediaPosition={section.mediaPosition}
+                  />
                 </div>
               </section>
             );

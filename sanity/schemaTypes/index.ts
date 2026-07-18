@@ -3,7 +3,8 @@ import { eventType } from './event'
 import { submissionType } from './submission'
 import { homePageType } from './homePage'
 import { aboutPageType } from './aboutPage'
+import { speakerType } from './speaker'
 
 export const schemaTypes: { types: SchemaTypeDefinition[] } = {
-  types: [eventType, submissionType, homePageType, aboutPageType],
+  types: [eventType, submissionType, homePageType, aboutPageType, speakerType],
 }
