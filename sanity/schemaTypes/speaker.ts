@@ -9,7 +9,7 @@ export const speakerType = defineType({
       name: 'name',
       title: 'Naam',
       type: 'string',
-      validation: (rule) => rule.required(),
+      description: 'Optioneel — mag je leeg laten als je de naam nog niet weet. De video kun je alvast los uploaden.',
     }),
     defineField({
       name: 'role',
@@ -48,6 +48,14 @@ export const speakerType = defineType({
       title: 'name',
       subtitle: 'role',
       media: 'photo',
+      hasVideo: 'video.asset',
+    },
+    prepare({ title, subtitle, media, hasVideo }: any) {
+      return {
+        title: title || (hasVideo ? 'Video (naam nog invullen)' : 'Nieuwe spreker / gast'),
+        subtitle,
+        media,
+      }
     },
   },
 })
