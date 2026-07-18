@@ -18,11 +18,14 @@ export default async function Bijeenkomsten() {
     { next: { revalidate: 60 } }
   );
 
-  const guests = await client.fetch(
+  const allGuests = await client.fetch(
     `*[_type == "speaker"] | order(_createdAt asc){ _id, name, role, bio, photo, video{ asset-> { url } }, socialLink }`,
     {},
     { next: { revalidate: 60 } }
   );
+
+  // Alleen gasten met een geuploade video tonen; dit blok bestaat om de video te promoten.
+  const guests = (allGuests || []).filter((g: any) => g.video?.asset?.url);
 
   return (
     <div className="py-24 bg-stone-50 min-h-screen">
@@ -56,7 +59,7 @@ export default async function Bijeenkomsten() {
               <PromoVideoBlock
                 key={guest._id}
                 guest={guest}
-                title={`${guest.name} nodigt je uit`}
+                title={guest.name ? `${guest.name} nodigt je uit` : 'Kom langs op onze bijeenkomst'}
                 text={guest.bio}
                 buttonText="Meld je aan"
                 buttonLink="/aanmelden"
