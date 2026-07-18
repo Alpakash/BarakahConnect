@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "seed": "node scripts/seed-content.mjs"
+    "seed": "node scripts/seed-content.mjs",
+    "add-promo-videos": "node scripts/add-promo-videos.mjs"
   },
   "dependencies": {
     "@portabletext/react": "^6.0.3",
