@@ -57,7 +57,6 @@ async function run() {
       _type: 'promoVideoSection',
       _key: randomUUID(),
       guest: { _type: 'reference', _ref: guest._id },
-      title: guest.name ? `${guest.name} nodigt je uit` : undefined,
       buttonText: 'Meld je aan',
       buttonLink: '/bijeenkomsten',
       mediaPosition: (existingSections.length + i) % 2 === 0 ? 'left' : 'right',
