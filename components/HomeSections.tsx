@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { urlFor } from '@/sanity/lib/image';
-import Logo from './Logo';
+import Hero from './Hero';
 import PromoVideoBlock from './PromoVideoBlock';
 import { PortableText } from '@portabletext/react';
 
@@ -31,55 +31,15 @@ export default function HomeSections({ sections, hideItemHeaders }: { sections: 
         switch (section._type) {
           case 'hero':
             return (
-              <section key={section._key || index} className="relative w-full py-28 md:py-40 overflow-hidden bg-stone-50 border-b border-stone-200">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-emerald-50 via-stone-50 to-stone-100 z-0 opacity-70"></div>
-                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-100/50 rounded-full blur-[100px] -mr-48 -mt-48 z-0 pointer-events-none"></div>
-
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                  <div className="grid lg:grid-cols-2 gap-16 items-center">
-                    <div className="text-left">
-                      <h1 className="font-serif text-5xl md:text-7xl font-medium tracking-tight mb-8 text-stone-900 leading-[1.1]">
-                        {section.title}<br />
-                        <span className="text-emerald-800">{section.subtitle}</span>
-                      </h1>
-                      <p className="text-lg md:text-xl text-stone-600 max-w-lg mb-12 leading-relaxed font-light">
-                        {section.text}
-                      </p>
-                      <div className="flex flex-col sm:flex-row gap-5">
-                        {section.primaryButtonText && (
-                          <Link href={section.primaryButtonLink || '/bijeenkomsten'} className="bg-emerald-700 hover:bg-emerald-800 px-8 py-4 rounded font-medium text-white shadow-lg transition-all text-center flex items-center justify-center gap-2 hover:-translate-y-0.5">
-                            {section.primaryButtonText}
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                              <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                            </svg>
-                          </Link>
-                        )}
-                        <Link href="/over-ons" className="bg-white hover:bg-stone-50 border border-stone-200 px-8 py-4 rounded font-medium text-stone-700 shadow-sm transition-all text-center hover:-translate-y-0.5">
-                          Lees ons verhaal
-                        </Link>
-                      </div>
-                    </div>
-
-                    <div className="hidden lg:block relative">
-                      <div className="absolute -inset-4 bg-emerald-100 opacity-30 blur-3xl rounded-full z-0"></div>
-                      <div className="relative z-10 w-full h-[500px] flex items-center justify-center">
-                        {section.image ? (
-                          <Image
-                            src={urlFor(section.image).width(1000).url()}
-                            alt={section.title}
-                            fill
-                            className="object-contain p-12 drop-shadow-sm"
-                          />
-                        ) : (
-                           <div className="w-full h-full flex items-center justify-center">
-                             <Logo className="w-full h-full p-12" />
-                           </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
+              <Hero
+                key={section._key || index}
+                title={section.title}
+                subtitle={section.subtitle}
+                text={section.text}
+                image={section.image}
+                primaryButtonText={section.primaryButtonText}
+                primaryButtonLink={section.primaryButtonLink}
+              />
             );
 
           case 'textSection':
