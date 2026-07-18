@@ -59,7 +59,6 @@ export default async function Bijeenkomsten() {
               <PromoVideoBlock
                 key={guest._id}
                 guest={guest}
-                title={guest.name ? `${guest.name} nodigt je uit` : 'Kom langs op onze bijeenkomst'}
                 text={guest.bio}
                 buttonText="Meld je aan"
                 buttonLink="/aanmelden"
