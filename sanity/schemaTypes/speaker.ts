@@ -2,7 +2,7 @@ import { defineField, defineType } from 'sanity'
 
 export const speakerType = defineType({
   name: 'speaker',
-  title: 'Spreker',
+  title: 'Spreker / Gast',
   type: 'document',
   fields: [
     defineField({

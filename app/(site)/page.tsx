@@ -15,7 +15,17 @@ export default async function Home() {
       perspective: isEnabled ? 'drafts' : 'published',
       stega: isEnabled
     })
-    .fetch(`*[_type == "homePage"][0]`, {}, { stega: isEnabled }) || {};
+    .fetch(
+      `*[_type == "homePage"][0]{
+        ...,
+        sections[]{
+          ...,
+          guest->{ _id, name, role, bio, photo, video{ asset-> { url } }, socialLink }
+        }
+      }`,
+      {},
+      { stega: isEnabled }
+    ) || {};
 
   const sections = content.sections || [];
 
