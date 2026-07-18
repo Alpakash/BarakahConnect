@@ -125,19 +125,6 @@ export const homePageType = defineType({
             { name: 'text', type: 'text', title: 'Tekst (optioneel)' },
             { name: 'buttonText', type: 'string', title: 'Tekst op knop', initialValue: 'Meld je aan' },
             { name: 'buttonLink', type: 'string', title: 'Link knop', initialValue: '/bijeenkomsten' },
-            {
-              name: 'mediaPosition',
-              title: 'Video links of rechts',
-              type: 'string',
-              options: {
-                list: [
-                  { title: 'Links', value: 'left' },
-                  { title: 'Rechts', value: 'right' },
-                ],
-                layout: 'radio',
-              },
-              initialValue: 'left',
-            },
           ],
           preview: {
             select: { title: 'title', guestName: 'guest.name', media: 'guest.photo' },

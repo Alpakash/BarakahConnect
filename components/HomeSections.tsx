@@ -136,7 +136,7 @@ export default function HomeSections({ sections, hideItemHeaders }: { sections: 
 
           case 'promoVideoSection':
             return (
-              <section key={section._key || index} className="py-24 bg-white relative overflow-hidden">
+              <section key={section._key || index} className="py-16 bg-white relative overflow-hidden">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                   <PromoVideoBlock
                     guest={section.guest}
@@ -144,7 +144,6 @@ export default function HomeSections({ sections, hideItemHeaders }: { sections: 
                     text={section.text}
                     buttonText={section.buttonText}
                     buttonLink={section.buttonLink}
-                    mediaPosition={section.mediaPosition}
                   />
                 </div>
               </section>
