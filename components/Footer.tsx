@@ -8,10 +8,23 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
           
           {/* Kolom 1: Logo */}
-          <div className="lg:col-span-1 flex flex-col justify-start">
+          <div className="lg:col-span-1 flex flex-col justify-start gap-5">
             <Link href="/" className="inline-block bg-white p-4 rounded-2xl w-fit xl:hover:shadow-md transition-shadow">
               <Logo className="w-36 lg:w-44 h-auto" />
             </Link>
+            <a
+              href="https://www.instagram.com/officialbarakahconnect/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Barakah Connect op Instagram"
+              className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-stone-700 text-stone-300 hover:text-white hover:border-emerald-600 hover:bg-emerald-700 transition-colors"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75}>
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+              </svg>
+            </a>
           </div>
 
           {/* Kolom 2: Introductietekst */}
