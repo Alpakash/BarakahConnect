@@ -33,5 +33,11 @@ export const eventType = defineType({
       type: 'image',
       options: { hotspot: true },
     }),
+    defineField({
+      name: 'speakers',
+      title: 'Sprekers',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'speaker' }] }],
+    }),
   ],
 })
