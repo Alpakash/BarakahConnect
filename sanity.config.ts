@@ -2,11 +2,12 @@ import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { presentationTool } from 'sanity/presentation'
 import { schemaTypes } from './sanity/schemaTypes'
+import { projectId, dataset } from './sanity/env'
 
 export default defineConfig({
   basePath: '/studio',
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
+  projectId,
+  dataset,
   title: 'Barakah Connect Studio',
   plugins: [
     structureTool({
