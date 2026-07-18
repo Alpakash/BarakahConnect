@@ -54,17 +54,19 @@ export default async function Bijeenkomsten() {
         )}
 
         {guests && guests.length > 0 && (
-          <div className="mt-28 space-y-24">
-            {guests.map((guest: any, i: number) => (
-              <PromoVideoBlock
-                key={guest._id}
-                guest={guest}
-                text={guest.bio}
-                buttonText="Meld je aan"
-                buttonLink="/aanmelden"
-                mediaPosition={i % 2 === 0 ? 'left' : 'right'}
-              />
-            ))}
+          <div className="mt-24">
+            <h2 className="font-serif text-2xl md:text-3xl text-stone-900 text-center mb-12">Zij nodigen je uit</h2>
+            <div className="flex flex-wrap justify-center gap-10 max-w-3xl mx-auto">
+              {guests.map((guest: any) => (
+                <PromoVideoBlock
+                  key={guest._id}
+                  guest={guest}
+                  text={guest.bio}
+                  buttonText="Meld je aan"
+                  buttonLink="/aanmelden"
+                />
+              ))}
+            </div>
           </div>
         )}
 

@@ -53,13 +53,12 @@ async function run() {
 
   const newSections = guests
     .filter((guest) => !alreadyPlacedGuestIds.has(guest._id))
-    .map((guest, i) => ({
+    .map((guest) => ({
       _type: 'promoVideoSection',
       _key: randomUUID(),
       guest: { _type: 'reference', _ref: guest._id },
       buttonText: 'Meld je aan',
       buttonLink: '/bijeenkomsten',
-      mediaPosition: (existingSections.length + i) % 2 === 0 ? 'left' : 'right',
     }))
 
   if (newSections.length === 0) {
