@@ -171,7 +171,7 @@ export default function HomeSections({ sections, hideItemHeaders }: { sections: 
             );
 
             const cta = (
-              <div className="mt-10 text-center">
+              <div className="mt-10 flex flex-col items-center text-center">
                 <Link
                   href="/bijeenkomsten"
                   className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 px-8 py-4 rounded-full font-semibold text-white shadow-md transition-all hover:-translate-y-0.5"
