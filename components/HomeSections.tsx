@@ -27,7 +27,8 @@ export default function HomeSections({ sections, hideItemHeaders }: { sections: 
   if (!sections || sections.length === 0) return null;
 
   // Groepeer opeenvolgende promoVideoSection-blokken tot één rij i.p.v. los
-  // gestapelde secties met veel dode ruimte ertussen.
+  // gestapelde secties met veel dode ruimte ertussen. Een textSection die daar
+  // direct op volgt (bijv. Missie & Visie) wordt ernaast gezet i.p.v. eronder.
   const groupedSections: any[] = [];
   sections.forEach((section: any) => {
     const previous = groupedSections[groupedSections.length - 1];
@@ -35,6 +36,9 @@ export default function HomeSections({ sections, hideItemHeaders }: { sections: 
       previous.items.push(section);
     } else if (section._type === 'promoVideoSection') {
       groupedSections.push({ _type: 'promoVideoGroup', _key: section._key, items: [section] });
+    } else if (section._type === 'textSection' && previous?._type === 'promoVideoGroup') {
+      previous._type = 'promoVideoWithText';
+      previous.textSection = section;
     } else {
       groupedSections.push(section);
     }
@@ -149,46 +153,66 @@ export default function HomeSections({ sections, hideItemHeaders }: { sections: 
               </section>
             );
 
-          case 'promoVideoGroup': {
-            const speakerNames = section.items
-              .map((item: any) => item.guest?.name)
-              .filter(Boolean);
+          case 'promoVideoGroup':
+          case 'promoVideoWithText': {
+            const textSection = section.textSection;
+
+            const videos = (
+              <div className="flex flex-wrap justify-center gap-14">
+                {section.items.map((item: any, i: number) => (
+                  <PromoVideoBlock
+                    key={item._key || i}
+                    guest={item.guest}
+                    title={item.title}
+                    text={item.text}
+                  />
+                ))}
+              </div>
+            );
+
+            const cta = (
+              <div className="mt-10 text-center">
+                <Link
+                  href="/bijeenkomsten"
+                  className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 px-8 py-4 rounded-full font-semibold text-white shadow-md transition-all hover:-translate-y-0.5"
+                >
+                  Meld je aan voor de bijeenkomst
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </Link>
+                <p className="mt-4 text-stone-500 text-sm">
+                  Met Kosso, Mo Max Pro, Umair Bantvawala en Enriqueo Beerthuizen
+                </p>
+              </div>
+            );
 
             return (
               <section key={section._key || index} className="py-20 bg-white relative overflow-hidden">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="text-center max-w-2xl mx-auto mb-16">
-                    <h2 className="font-serif text-3xl md:text-4xl text-stone-900 font-medium mb-4">Maak kennis met Barakah Connect</h2>
-                    <p className="text-stone-500 text-lg leading-relaxed">
-                      Zo ziet &ldquo;samen sterker&rdquo; eruit in de praktijk.
-                    </p>
+                    <h2 className="font-serif text-3xl md:text-4xl text-stone-900 font-medium">Maak kennis met Barakah Connect</h2>
                   </div>
-                  <div className="flex flex-wrap justify-center gap-14">
-                    {section.items.map((item: any, i: number) => (
-                      <PromoVideoBlock
-                        key={item._key || i}
-                        guest={item.guest}
-                        title={item.title}
-                        text={item.text}
-                      />
-                    ))}
-                  </div>
-                  <div className="mt-16 text-center">
-                    <Link
-                      href="/bijeenkomsten"
-                      className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 px-8 py-4 rounded-full font-semibold text-white shadow-md transition-all hover:-translate-y-0.5"
-                    >
-                      Meld je aan voor de bijeenkomst
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                      </svg>
-                    </Link>
-                    {speakerNames.length > 0 && (
-                      <p className="mt-4 text-stone-500 text-sm">
-                        Met {speakerNames.join(' & ')}
-                      </p>
-                    )}
-                  </div>
+                  {textSection ? (
+                    <div className="grid md:grid-cols-2 gap-16 items-center">
+                      <div>
+                        {videos}
+                        {cta}
+                      </div>
+                      <div>
+                        <h3 className="font-serif text-2xl md:text-3xl text-stone-900 mb-4 font-medium">{textSection.title}</h3>
+                        <div className="w-16 h-1 bg-emerald-700 mb-6 rounded-full"></div>
+                        <p className="text-lg text-stone-600 leading-relaxed">
+                          {textSection.text}
+                        </p>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      {videos}
+                      {cta}
+                    </>
+                  )}
                 </div>
               </section>
             );
