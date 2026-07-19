@@ -168,8 +168,6 @@ export default function HomeSections({ sections, hideItemHeaders }: { sections: 
                         guest={item.guest}
                         title={item.title}
                         text={item.text}
-                        buttonText={item.buttonText}
-                        buttonLink={item.buttonLink}
                       />
                     ))}
                   </div>

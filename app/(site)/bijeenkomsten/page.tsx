@@ -75,8 +75,6 @@ export default async function Bijeenkomsten() {
                   key={guest._id}
                   guest={guest}
                   text={guest.bio}
-                  buttonText="Meld je aan"
-                  buttonLink="/aanmelden"
                 />
               ))}
             </div>
