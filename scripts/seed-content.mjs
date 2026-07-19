@@ -42,7 +42,7 @@ async function seed() {
         _type: 'textSection',
         _key: 'text-1',
         title: 'Missie & Visie',
-        text: 'Wij organiseren om de twee weken inspirerende bijeenkomsten met ontbijt. Onze missie is eenduidig: Elkaar versterken, waardevolle netwerken opbouwen en oprechte ondersteuning bieden—zowel in je persoonlijke groei als binnen het ondernemerschap. Iedereen is welkom!'
+        text: 'Wij organiseren om de twee weken inspirerende bijeenkomsten met ontbijt. Onze missie is eenduidig: Elkaar versterken, waardevolle netwerken opbouwen en oprechte ondersteuning bieden, zowel in je persoonlijke groei als binnen het ondernemerschap. Iedereen is welkom!'
       },
       {
         _type: 'featuresSection',

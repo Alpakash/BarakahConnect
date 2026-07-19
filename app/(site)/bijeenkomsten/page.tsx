@@ -65,8 +65,8 @@ export default async function Bijeenkomsten() {
               <h2 className="font-serif text-2xl md:text-3xl text-stone-900 font-medium mb-4">Ondernemers nodigen ondernemers uit</h2>
               <p className="text-stone-500 text-lg leading-relaxed">
                 {nextEventDateStr
-                  ? `Hoor het alvast van gasten die er eerder stonden — en schuif zelf aan op ${nextEventDateStr}.`
-                  : 'Hoor het alvast van gasten die op een eerdere bijeenkomst stonden.'}
+                  ? `Schuif zelf aan op ${nextEventDateStr}.`
+                  : 'Schuif zelf aan bij onze volgende bijeenkomst.'}
               </p>
             </div>
             <div className="flex flex-wrap justify-center gap-10 max-w-3xl mx-auto">

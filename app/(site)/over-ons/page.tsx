@@ -22,7 +22,7 @@ const INTRO_IMAGE_URL =
 const DEFAULTS = {
   intro: {
     heading: 'Onze Missie',
-    text: 'Barakah Connect is een netwerkorganisatie die broeders en zusters samenbrengt. Onze missie is om een krachtig, ondersteunend netwerk op te bouwen waar leden elkaar versterken — zowel in het ondernemerschap als op persoonlijk vlak.',
+    text: 'Barakah Connect is een netwerkorganisatie die broeders en zusters samenbrengt. Onze missie is om een krachtig, ondersteunend netwerk op te bouwen waar leden elkaar versterken, zowel in het ondernemerschap als op persoonlijk vlak.',
   },
   pillar1: {
     heading: 'Wat we doen',
