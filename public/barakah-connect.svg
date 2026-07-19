@@ -39,7 +39,7 @@
       }
 
       .cls-10 {
-        filter: url(#drop-shadow-2);
+        filter: none;
       }
 
       .cls-11 {
@@ -103,7 +103,7 @@
       }
 
       .cls-26 {
-        filter: url(#drop-shadow-4);
+        filter: none;
       }
 
       .cls-27 {
@@ -119,7 +119,7 @@
       }
 
       .cls-30 {
-        filter: url(#drop-shadow-1);
+        filter: none;
       }
 
       .cls-31 {
@@ -215,7 +215,7 @@
       }
 
       .cls-54 {
-        filter: url(#drop-shadow-3);
+        filter: none;
       }
 
       .cls-55 {
