@@ -9,7 +9,7 @@ export const speakerType = defineType({
       name: 'name',
       title: 'Naam',
       type: 'string',
-      description: 'Optioneel — mag je leeg laten als je de naam nog niet weet. De video kun je alvast los uploaden.',
+      description: 'Optioneel: mag je leeg laten als je de naam nog niet weet. De video kun je alvast los uploaden.',
     }),
     defineField({
       name: 'role',

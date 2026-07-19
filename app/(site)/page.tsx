@@ -50,7 +50,7 @@ export default async function Home() {
               <h2 className="font-serif text-4xl md:text-5xl text-stone-900 mb-8 font-medium">Missie & Visie</h2>
               <div className="w-16 h-1 bg-emerald-700 mx-auto mb-12 rounded-full"></div>
               <p className="text-lg md:text-xl text-stone-600 max-w-4xl mx-auto leading-relaxed mb-24 min-h-[50px]">
-                Wij organiseren om de twee weken inspirerende bijeenkomsten met ontbijt. Onze missie is eenduidig: Elkaar versterken, waardevolle netwerken opbouwen en oprechte ondersteuning bieden—zowel in je persoonlijke groei als binnen het ondernemerschap. Iedereen is welkom!
+                Wij organiseren om de twee weken inspirerende bijeenkomsten met ontbijt. Onze missie is eenduidig: Elkaar versterken, waardevolle netwerken opbouwen en oprechte ondersteuning bieden, zowel in je persoonlijke groei als binnen het ondernemerschap. Iedereen is welkom!
               </p>
 
               <div className="grid md:grid-cols-3 gap-10">
