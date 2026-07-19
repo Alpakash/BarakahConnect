@@ -3,7 +3,7 @@ import Image from 'next/image'
 export default function Logo({ className }: { className?: string }) {
   return (
     <Image 
-      src="/barakah-connect.svg" 
+      src="/barakah-connect-logo.jpg"
       alt="Barakah Connect" 
       width={400} 
       height={400} 
