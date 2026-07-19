@@ -19,7 +19,19 @@ export default function PromoVideoBlock({
   buttonLink?: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [videoState, setVideoState] = useState<'loading' | 'ready' | 'error'>('loading');
+  const [retryKey, setRetryKey] = useState(0);
   const videoUrl = guest?.video?.asset?.url;
+
+  const openModal = () => {
+    setVideoState('loading');
+    setIsOpen(true);
+  };
+
+  const retry = () => {
+    setVideoState('loading');
+    setRetryKey((k) => k + 1);
+  };
 
   return (
     <>
@@ -43,7 +55,7 @@ export default function PromoVideoBlock({
           {videoUrl && (
             <button
               type="button"
-              onClick={() => setIsOpen(true)}
+              onClick={openModal}
               aria-label={`Bekijk video van ${guest?.name || 'gast'}`}
               className="absolute inset-0 flex items-center justify-center bg-black/10 hover:bg-black/30 transition-colors cursor-pointer group"
             >
@@ -99,14 +111,53 @@ export default function PromoVideoBlock({
           >
             &times;
           </button>
-          <video
-            src={videoUrl}
-            controls
-            autoPlay
-            preload="none"
-            className="max-h-[85vh] w-auto rounded-lg shadow-2xl aspect-[9/16]"
-            onClick={(e) => e.stopPropagation()}
-          />
+
+          {videoState === 'loading' && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 pointer-events-none text-white/80">
+              <div className="w-10 h-10 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              <p className="text-sm">Video laden…</p>
+            </div>
+          )}
+
+          {videoState === 'error' ? (
+            <div
+              className="max-w-sm w-full bg-stone-900 border border-stone-700 rounded-2xl p-8 text-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <p className="text-white font-medium mb-2">De video kon niet geladen worden</p>
+              <p className="text-stone-400 text-sm mb-6">Dit kan door een trage of onstabiele verbinding komen. Probeer het opnieuw, of open de video direct.</p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <button
+                  type="button"
+                  onClick={retry}
+                  className="bg-emerald-700 hover:bg-emerald-800 text-white px-5 py-2.5 rounded-lg font-medium text-sm transition-colors cursor-pointer"
+                >
+                  Probeer opnieuw
+                </button>
+                <a
+                  href={videoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-lg font-medium text-sm transition-colors"
+                >
+                  Open in nieuw tabblad
+                </a>
+              </div>
+            </div>
+          ) : (
+            <video
+              key={retryKey}
+              src={videoUrl}
+              controls
+              autoPlay
+              preload="auto"
+              className="max-h-[85vh] w-auto rounded-lg shadow-2xl aspect-[9/16]"
+              onClick={(e) => e.stopPropagation()}
+              onCanPlay={() => setVideoState('ready')}
+              onPlaying={() => setVideoState('ready')}
+              onError={() => setVideoState('error')}
+            />
+          )}
         </div>
       )}
     </>
