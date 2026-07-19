@@ -28,6 +28,11 @@ export default async function Bijeenkomsten() {
   // Alleen gasten met een geuploade video tonen; dit blok bestaat om de video te promoten.
   const guests = (allGuests || []).filter((g: any) => g.video?.asset?.url);
 
+  const nextEvent = events?.[0];
+  const nextEventDateStr = nextEvent?.date
+    ? new Intl.DateTimeFormat('nl-NL', { weekday: 'long', day: 'numeric', month: 'long' }).format(new Date(nextEvent.date))
+    : null;
+
   return (
     <div className="py-24 bg-stone-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -56,7 +61,14 @@ export default async function Bijeenkomsten() {
 
         {guests && guests.length > 0 && (
           <div className="mt-24">
-            <h2 className="font-serif text-2xl md:text-3xl text-stone-900 text-center mb-12">Zij nodigen je uit</h2>
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <h2 className="font-serif text-2xl md:text-3xl text-stone-900 font-medium mb-4">Ondernemers nodigen ondernemers uit</h2>
+              <p className="text-stone-500 text-lg leading-relaxed">
+                {nextEventDateStr
+                  ? `Hoor het alvast van gasten die er eerder stonden — en schuif zelf aan op ${nextEventDateStr}.`
+                  : 'Hoor het alvast van gasten die op een eerdere bijeenkomst stonden.'}
+              </p>
+            </div>
             <div className="flex flex-wrap justify-center gap-10 max-w-3xl mx-auto">
               {guests.map((guest: any) => (
                 <PromoVideoBlock
