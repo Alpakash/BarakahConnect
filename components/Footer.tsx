@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Logo from './Logo'
+import { MailIcon, PhoneIcon, MapPinIcon } from './icons'
 
 export default function Footer() {
   return (
@@ -49,15 +50,15 @@ export default function Footer() {
             <h3 className="text-stone-50 font-serif text-lg mb-6">Contact</h3>
             <ul className="space-y-4">
               <li className="flex items-center gap-3 text-stone-400 hover:text-emerald-500 transition-colors">
-                <span className="text-lg">✉</span>
+                <MailIcon className="w-4 h-4 shrink-0" />
                 <a href="mailto:info@barakahconnect.nl">info@barakahconnect.nl</a>
               </li>
               <li className="flex items-center gap-3 text-stone-400 hover:text-emerald-500 transition-colors">
-                <span className="text-lg">📞</span>
+                <PhoneIcon className="w-4 h-4 shrink-0" />
                 <a href="tel:+31613687860">+31 6 13687860</a>
               </li>
               <li className="flex items-center gap-3 text-stone-400">
-                <span className="text-lg">📍</span>
+                <MapPinIcon className="w-4 h-4 shrink-0" />
                 <span>Regio Nederland</span>
               </li>
             </ul>

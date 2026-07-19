@@ -1,5 +1,6 @@
 import EventCard from "@/components/EventCard";
 import PromoVideoBlock from "@/components/PromoVideoBlock";
+import { CalendarIcon } from "@/components/icons";
 import { client } from "@/sanity/client";
 
 export const metadata = {
@@ -44,7 +45,7 @@ export default async function Bijeenkomsten() {
           </div>
         ) : (
           <div className="bg-white rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-stone-100 p-16 text-center max-w-2xl mx-auto">
-            <div className="text-6xl mb-6 opacity-30">🗓</div>
+            <CalendarIcon className="w-16 h-16 mx-auto mb-6 text-emerald-800/30" />
             <h3 className="font-serif text-2xl text-stone-800 mb-4">Agenda wordt nog bijgewerkt</h3>
             <p className="text-stone-500 text-lg leading-relaxed">
               De datums en details van de volgende bijeenkomsten worden momenteel afgestemd.

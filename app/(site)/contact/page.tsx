@@ -1,4 +1,5 @@
 import SubmissionForm from "@/components/SubmissionForm";
+import { MailIcon, MapPinIcon, PhoneIcon } from "@/components/icons";
 
 export const metadata = {
   title: 'Contact',
@@ -25,7 +26,7 @@ export default function Contact() {
             <div className="space-y-8">
               <div className="flex items-start gap-5">
                 <div className="bg-emerald-50 text-emerald-800 p-4 rounded-xl">
-                  <span className="text-2xl">✉</span>
+                  <MailIcon className="w-6 h-6" />
                 </div>
                 <div className="pt-1">
                   <h3 className="font-serif text-lg font-medium text-stone-900 mb-1">E-mail</h3>
@@ -34,7 +35,7 @@ export default function Contact() {
               </div>
               <div className="flex items-start gap-5">
                 <div className="bg-emerald-50 text-emerald-800 p-4 rounded-xl">
-                  <span className="text-2xl">📍</span>
+                  <MapPinIcon className="w-6 h-6" />
                 </div>
                 <div className="pt-1">
                   <h3 className="font-serif text-lg font-medium text-stone-900 mb-1">Locatie</h3>
@@ -43,7 +44,7 @@ export default function Contact() {
               </div>
               <div className="flex items-start gap-5">
                 <div className="bg-emerald-50 text-emerald-800 p-4 rounded-xl">
-                  <span className="text-2xl">📞</span>
+                  <PhoneIcon className="w-6 h-6" />
                 </div>
                 <div className="pt-1">
                   <h3 className="font-serif text-lg font-medium text-stone-900 mb-1">Telefoon</h3>

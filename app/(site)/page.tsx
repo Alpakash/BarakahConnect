@@ -2,6 +2,7 @@ import { client } from '@/sanity/client';
 import { draftMode } from 'next/headers';
 import HomeSections from '@/components/HomeSections';
 import Hero from '@/components/Hero';
+import { HandshakeIcon, LightbulbIcon, MoonStarIcon } from '@/components/icons';
 
 export const revalidate = 60;
 
@@ -54,19 +55,25 @@ export default async function Home() {
 
               <div className="grid md:grid-cols-3 gap-10">
                 <div className="bg-stone-50/50 p-10 rounded-2xl border border-stone-100 flex flex-col items-center text-center hover:bg-white hover:shadow-[0_8px_30px_rgba(16,185,129,0.08)] hover:-translate-y-1 transition-all duration-300">
-                  <div className="text-4xl mb-8 w-20 h-20 bg-white shadow-sm rounded-2xl flex items-center justify-center border border-stone-100">🤝</div>
+                  <div className="mb-8 w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-700">
+                    <HandshakeIcon className="w-7 h-7" />
+                  </div>
                   <h3 className="font-serif text-2xl font-medium mb-4 text-stone-900">Verbinden</h3>
                   <p className="text-stone-600 leading-relaxed">Gelijkgestemden ontmoeten wordt laagdrempelig. Vorm diepgaande vriendschappen en professionele relaties in een vertrouwde omgeving.</p>
                 </div>
 
                 <div className="bg-stone-50/50 p-10 rounded-2xl border border-stone-100 flex flex-col items-center text-center hover:bg-white hover:shadow-[0_8px_30px_rgba(16,185,129,0.08)] hover:-translate-y-1 transition-all duration-300">
-                  <div className="text-4xl mb-8 w-20 h-20 bg-white shadow-sm rounded-2xl flex items-center justify-center border border-stone-100">💡</div>
+                  <div className="mb-8 w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-700">
+                    <LightbulbIcon className="w-7 h-7" />
+                  </div>
                   <h3 className="font-serif text-2xl font-medium mb-4 text-stone-900">Kennis delen</h3>
                   <p className="text-stone-600 leading-relaxed">Praktische masterclasses, pitches en open gesprekken. We ondersteunen elkaars ondernemingen actief door samen te sparren.</p>
                 </div>
 
                 <div className="bg-stone-50/50 p-10 rounded-2xl border border-stone-100 flex flex-col items-center text-center hover:bg-white hover:shadow-[0_8px_30px_rgba(16,185,129,0.08)] hover:-translate-y-1 transition-all duration-300">
-                  <div className="text-4xl mb-8 w-20 h-20 bg-white shadow-sm rounded-2xl flex items-center justify-center border border-stone-100">🌙</div>
+                  <div className="mb-8 w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-700">
+                    <MoonStarIcon className="w-7 h-7" />
+                  </div>
                   <h3 className="font-serif text-2xl font-medium mb-4 text-stone-900">Voor iedereen</h3>
                   <p className="text-stone-600 leading-relaxed">Broeders en zusters komen samen in aparte, comfortabele groepen. En ook niet-moslims zijn meer dan welkom om de barakah te ervaren.</p>
                 </div>

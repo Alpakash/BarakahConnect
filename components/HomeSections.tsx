@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { urlFor } from '@/sanity/lib/image';
 import Hero from './Hero';
 import PromoVideoBlock from './PromoVideoBlock';
+import { ResolvedIcon } from './icons';
 import { PortableText } from '@portabletext/react';
 
 const ptComponents = {
@@ -25,9 +26,23 @@ const ptComponents = {
 export default function HomeSections({ sections, hideItemHeaders }: { sections: any[], hideItemHeaders?: boolean }) {
   if (!sections || sections.length === 0) return null;
 
+  // Groepeer opeenvolgende promoVideoSection-blokken tot één rij i.p.v. los
+  // gestapelde secties met veel dode ruimte ertussen.
+  const groupedSections: any[] = [];
+  sections.forEach((section: any) => {
+    const previous = groupedSections[groupedSections.length - 1];
+    if (section._type === 'promoVideoSection' && previous?._type === 'promoVideoGroup') {
+      previous.items.push(section);
+    } else if (section._type === 'promoVideoSection') {
+      groupedSections.push({ _type: 'promoVideoGroup', _key: section._key, items: [section] });
+    } else {
+      groupedSections.push(section);
+    }
+  });
+
   return (
     <>
-      {sections.map((section: any, index: number) => {
+      {groupedSections.map((section: any, index: number) => {
         switch (section._type) {
           case 'hero':
             return (
@@ -76,8 +91,8 @@ export default function HomeSections({ sections, hideItemHeaders }: { sections: 
                   <div className="grid md:grid-cols-3 gap-10">
                     {section.items?.map((item: any, i: number) => (
                       <div key={item._key || i} className="bg-white p-10 rounded-2xl border border-stone-100 flex flex-col items-center text-center hover:shadow-[0_8px_30px_rgba(16,185,129,0.08)] hover:-translate-y-1 transition-all duration-300">
-                        <div className="text-4xl mb-8 w-20 h-20 bg-stone-50 shadow-sm rounded-2xl flex items-center justify-center border border-stone-100">
-                          {item.emoji || '✨'}
+                        <div className="mb-8 w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-700">
+                          <ResolvedIcon emoji={item.emoji} className="w-7 h-7" />
                         </div>
                         <h3 className="font-serif text-2xl font-medium mb-4 text-stone-900">{item.title}</h3>
                         <p className="text-stone-600 leading-relaxed">{item.text}</p>
@@ -134,17 +149,25 @@ export default function HomeSections({ sections, hideItemHeaders }: { sections: 
               </section>
             );
 
-          case 'promoVideoSection':
+          case 'promoVideoGroup':
             return (
-              <section key={section._key || index} className="py-16 bg-white relative overflow-hidden">
+              <section key={section._key || index} className="py-20 bg-white relative overflow-hidden">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <PromoVideoBlock
-                    guest={section.guest}
-                    title={section.title}
-                    text={section.text}
-                    buttonText={section.buttonText}
-                    buttonLink={section.buttonLink}
-                  />
+                  {section.items.length > 1 && (
+                    <h2 className="font-serif text-3xl md:text-4xl text-stone-900 text-center mb-16 font-medium">Zij nodigen je uit</h2>
+                  )}
+                  <div className="flex flex-wrap justify-center gap-14">
+                    {section.items.map((item: any, i: number) => (
+                      <PromoVideoBlock
+                        key={item._key || i}
+                        guest={item.guest}
+                        title={item.title}
+                        text={item.text}
+                        buttonText={item.buttonText}
+                        buttonLink={item.buttonLink}
+                      />
+                    ))}
+                  </div>
                 </div>
               </section>
             );
