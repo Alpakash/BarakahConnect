@@ -28,7 +28,14 @@ export default async function Home() {
       { stega: isEnabled }
     ) || {};
 
-  const sections = content.sections || [];
+  // Pakketten heeft een eigen pagina (/lid-worden), dus niet nogmaals tonen op de homepage.
+  // De uitnodigingsvideo "15 jaar aan ondernemen" is op verzoek verborgen; het blok kan ook
+  // direct in Studio (Home Pagina -> Pagina Indeling) verwijderd worden.
+  const sections = (content.sections || []).filter((section: any) => {
+    if (section._type === 'membershipSection') return false;
+    if (section._type === 'promoVideoSection' && section.guest?.name === '15 jaar aan ondernemen') return false;
+    return true;
+  });
 
   return (
     <div className="flex flex-col flex-grow">

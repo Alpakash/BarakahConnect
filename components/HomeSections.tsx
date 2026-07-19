@@ -149,18 +149,20 @@ export default function HomeSections({ sections, hideItemHeaders }: { sections: 
               </section>
             );
 
-          case 'promoVideoGroup':
+          case 'promoVideoGroup': {
+            const speakerNames = section.items
+              .map((item: any) => item.guest?.name)
+              .filter(Boolean);
+
             return (
               <section key={section._key || index} className="py-20 bg-white relative overflow-hidden">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                  {section.items.length > 1 && (
-                    <div className="text-center max-w-2xl mx-auto mb-16">
-                      <h2 className="font-serif text-3xl md:text-4xl text-stone-900 font-medium mb-4">Ondernemers nodigen ondernemers uit</h2>
-                      <p className="text-stone-500 text-lg leading-relaxed">
-                        Zo ziet &ldquo;samen sterker&rdquo; eruit in de praktijk.
-                      </p>
-                    </div>
-                  )}
+                  <div className="text-center max-w-2xl mx-auto mb-16">
+                    <h2 className="font-serif text-3xl md:text-4xl text-stone-900 font-medium mb-4">Maak kennis met Barakah Connect</h2>
+                    <p className="text-stone-500 text-lg leading-relaxed">
+                      Zo ziet &ldquo;samen sterker&rdquo; eruit in de praktijk.
+                    </p>
+                  </div>
                   <div className="flex flex-wrap justify-center gap-14">
                     {section.items.map((item: any, i: number) => (
                       <PromoVideoBlock
@@ -171,9 +173,26 @@ export default function HomeSections({ sections, hideItemHeaders }: { sections: 
                       />
                     ))}
                   </div>
+                  <div className="mt-16 text-center">
+                    <Link
+                      href="/bijeenkomsten"
+                      className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 px-8 py-4 rounded-full font-semibold text-white shadow-md transition-all hover:-translate-y-0.5"
+                    >
+                      Meld je aan voor de bijeenkomst
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </Link>
+                    {speakerNames.length > 0 && (
+                      <p className="mt-4 text-stone-500 text-sm">
+                        Met {speakerNames.join(' & ')}
+                      </p>
+                    )}
+                  </div>
                 </div>
               </section>
             );
+          }
 
           case 'membershipSection':
             return (

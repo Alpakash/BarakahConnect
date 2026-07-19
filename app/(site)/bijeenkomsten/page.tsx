@@ -1,5 +1,4 @@
 import EventCard from "@/components/EventCard";
-import PromoVideoBlock from "@/components/PromoVideoBlock";
 import { CalendarIcon } from "@/components/icons";
 import { client } from "@/sanity/client";
 
@@ -18,20 +17,6 @@ export default async function Bijeenkomsten() {
     {},
     { next: { revalidate: 60 } }
   );
-
-  const allGuests = await client.fetch(
-    `*[_type == "speaker"] | order(_createdAt asc){ _id, name, role, bio, photo, video{ asset-> { url } }, socialLink }`,
-    {},
-    { next: { revalidate: 60 } }
-  );
-
-  // Alleen gasten met een geuploade video tonen; dit blok bestaat om de video te promoten.
-  const guests = (allGuests || []).filter((g: any) => g.video?.asset?.url);
-
-  const nextEvent = events?.[0];
-  const nextEventDateStr = nextEvent?.date
-    ? new Intl.DateTimeFormat('nl-NL', { weekday: 'long', day: 'numeric', month: 'long' }).format(new Date(nextEvent.date))
-    : null;
 
   return (
     <div className="py-24 bg-stone-50 min-h-screen">
@@ -58,29 +43,6 @@ export default async function Bijeenkomsten() {
             </p>
           </div>
         )}
-
-        {guests && guests.length > 0 && (
-          <div className="mt-24">
-            <div className="text-center max-w-2xl mx-auto mb-12">
-              <h2 className="font-serif text-2xl md:text-3xl text-stone-900 font-medium mb-4">Ondernemers nodigen ondernemers uit</h2>
-              <p className="text-stone-500 text-lg leading-relaxed">
-                {nextEventDateStr
-                  ? `Schuif zelf aan op ${nextEventDateStr}.`
-                  : 'Schuif zelf aan bij onze volgende bijeenkomst.'}
-              </p>
-            </div>
-            <div className="flex flex-wrap justify-center gap-10 max-w-3xl mx-auto">
-              {guests.map((guest: any) => (
-                <PromoVideoBlock
-                  key={guest._id}
-                  guest={guest}
-                  text={guest.bio}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-
       </div>
     </div>
   )
