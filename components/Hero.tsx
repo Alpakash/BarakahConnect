@@ -2,10 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { urlFor } from '@/sanity/lib/image';
 
-// Tijdelijke placeholder totdat er een eigen sfeerfoto via Sanity is geupload
+// Standaard sfeerfoto totdat er via Sanity een andere wordt geupload
 // op het Hero-blok (Home Pagina -> Hero Sectie -> Achtergrond/Hero Afbeelding).
-const FALLBACK_IMAGE_URL =
-  'https://images.unsplash.com/photo-1758873269276-9518d0cb4a0b?fm=jpg&q=80&w=2400&auto=format&fit=crop';
+const FALLBACK_IMAGE_URL = '/muslim-mosque.jpg';
 
 export default function Hero({
   title,
