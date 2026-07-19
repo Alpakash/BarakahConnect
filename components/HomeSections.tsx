@@ -171,7 +171,7 @@ export default function HomeSections({ sections, hideItemHeaders }: { sections: 
             );
 
             const cta = (
-              <div className="mt-10 flex flex-col items-center text-center">
+              <div className="mt-16 flex flex-col items-center text-center">
                 <Link
                   href="/bijeenkomsten"
                   className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 px-8 py-4 rounded-full font-semibold text-white shadow-md transition-all hover:-translate-y-0.5"
@@ -194,19 +194,19 @@ export default function HomeSections({ sections, hideItemHeaders }: { sections: 
                     <h2 className="font-serif text-3xl md:text-4xl text-stone-900 font-medium">Maak kennis met Barakah Connect</h2>
                   </div>
                   {textSection ? (
-                    <div className="grid md:grid-cols-2 gap-16 items-center">
-                      <div>
-                        {videos}
-                        {cta}
+                    <>
+                      <div className="grid md:grid-cols-2 gap-16 items-center">
+                        <div>{videos}</div>
+                        <div>
+                          <h3 className="font-serif text-2xl md:text-3xl text-stone-900 mb-4 font-medium">{textSection.title}</h3>
+                          <div className="w-16 h-1 bg-emerald-700 mb-6 rounded-full"></div>
+                          <p className="text-lg text-stone-600 leading-relaxed">
+                            {textSection.text}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="font-serif text-2xl md:text-3xl text-stone-900 mb-4 font-medium">{textSection.title}</h3>
-                        <div className="w-16 h-1 bg-emerald-700 mb-6 rounded-full"></div>
-                        <p className="text-lg text-stone-600 leading-relaxed">
-                          {textSection.text}
-                        </p>
-                      </div>
-                    </div>
+                      {cta}
+                    </>
                   ) : (
                     <>
                       {videos}

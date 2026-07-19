@@ -16,8 +16,7 @@ export const metadata = {
 
 export const revalidate = 60;
 
-const INTRO_IMAGE_URL =
-  'https://images.unsplash.com/photo-1758691737543-09a1b2b715fa?fm=jpg&q=80&w=1600&auto=format&fit=crop';
+const INTRO_IMAGE_URL = '/muslims-walking.jpg';
 
 const DEFAULTS = {
   intro: {
