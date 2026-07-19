@@ -13,19 +13,32 @@ export default function Footer() {
             <Link href="/" className="inline-block bg-white p-4 rounded-2xl w-fit xl:hover:shadow-md transition-shadow">
               <Logo className="w-36 lg:w-44 h-auto" />
             </Link>
-            <a
-              href="https://www.instagram.com/officialbarakahconnect/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Barakah Connect op Instagram"
-              className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-stone-700 text-stone-300 hover:text-white hover:border-emerald-600 hover:bg-emerald-700 transition-colors"
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75}>
-                <rect x="3" y="3" width="18" height="18" rx="5" />
-                <circle cx="12" cy="12" r="4" />
-                <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
-              </svg>
-            </a>
+            <div className="flex gap-3">
+              <a
+                href="https://www.instagram.com/officialbarakahconnect/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Barakah Connect op Instagram"
+                className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-stone-700 text-stone-300 hover:text-white hover:border-emerald-600 hover:bg-emerald-700 transition-colors"
+              >
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75}>
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+                </svg>
+              </a>
+              <a
+                href="https://www.tiktok.com/@barakah.connect"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Barakah Connect op TikTok"
+                className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-stone-700 text-stone-300 hover:text-white hover:border-emerald-600 hover:bg-emerald-700 transition-colors"
+              >
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.05z" />
+                </svg>
+              </a>
+            </div>
           </div>
 
           {/* Kolom 2: Introductietekst */}
