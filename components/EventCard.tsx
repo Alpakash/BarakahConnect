@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { urlFor } from '../sanity/lib/image'
 import Link from 'next/link'
 import WeeztixModal from './WeeztixModal'
+import { CalendarIcon, ClockIcon, MapPinIcon } from './icons'
 
 export default function EventCard({ event }: { event: any }) {
   const isTBD = !event.date;
@@ -27,8 +28,8 @@ export default function EventCard({ event }: { event: any }) {
             className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
         ) : (
-          <div className="absolute inset-0 bg-emerald-800/5 flex items-center justify-center">
-            <span className="text-5xl opacity-50">🗓</span>
+          <div className="absolute inset-0 bg-emerald-800/5 flex items-center justify-center text-emerald-800/30">
+            <CalendarIcon className="w-14 h-14" />
           </div>
         )}
         <div className="absolute top-4 left-4 bg-white/95 backdrop-blur px-4 py-1.5 rounded text-xs font-bold tracking-wide text-emerald-800 shadow-sm uppercase">
@@ -39,11 +40,11 @@ export default function EventCard({ event }: { event: any }) {
       <div className="p-6 flex flex-col flex-grow">
         <h3 className="font-serif text-2xl font-medium text-stone-900 mb-3 group-hover:text-emerald-700 transition-colors">{event.title}</h3>
         <p className="text-stone-500 text-sm flex items-center gap-2 mb-3">
-          <span className="text-emerald-700 shrink-0">🕒</span> <span className="capitalize">{dateStr}</span>
+          <ClockIcon className="w-4 h-4 text-emerald-700 shrink-0" /> <span className="capitalize">{dateStr}</span>
         </p>
         {event.location && (
           <p className="text-stone-500 text-sm flex items-center gap-2 mb-4">
-            <span className="text-emerald-700 shrink-0">📍</span> {event.location}
+            <MapPinIcon className="w-4 h-4 text-emerald-700 shrink-0" /> {event.location}
           </p>
         )}
         {event.description && (
