@@ -154,7 +154,12 @@ export default function HomeSections({ sections, hideItemHeaders }: { sections: 
               <section key={section._key || index} className="py-20 bg-white relative overflow-hidden">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                   {section.items.length > 1 && (
-                    <h2 className="font-serif text-3xl md:text-4xl text-stone-900 text-center mb-16 font-medium">Zij nodigen je uit</h2>
+                    <div className="text-center max-w-2xl mx-auto mb-16">
+                      <h2 className="font-serif text-3xl md:text-4xl text-stone-900 font-medium mb-4">Ondernemers nodigen ondernemers uit</h2>
+                      <p className="text-stone-500 text-lg leading-relaxed">
+                        Zo ziet &ldquo;samen sterker&rdquo; eruit in de praktijk — hoor het uit de eerste hand van gasten die er zelf stonden.
+                      </p>
+                    </div>
                   )}
                   <div className="flex flex-wrap justify-center gap-14">
                     {section.items.map((item: any, i: number) => (

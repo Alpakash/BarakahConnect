@@ -52,6 +52,11 @@ export default function PromoVideoBlock({
               <span className="text-xs font-medium tracking-wide uppercase">Video</span>
             </div>
           )}
+          {guest?.name && (
+            <span className="absolute top-4 left-4 right-4 bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 text-stone-900 px-3 py-1.5 rounded-full text-xs font-bold text-center shadow-[0_4px_20px_rgba(212,175,55,0.3)]">
+              {guest.name}
+            </span>
+          )}
           {videoUrl && (
             <button
               type="button"
@@ -68,13 +73,10 @@ export default function PromoVideoBlock({
           )}
         </div>
 
-        {(guest?.name || title || text) && (
+        {(guest?.role || title || text) && (
           <div className="mt-5">
-            {guest?.name && (
-              <p className="text-emerald-700 font-medium text-sm">
-                {guest.name}
-                {guest.role ? ` · ${guest.role}` : ''}
-              </p>
+            {guest?.role && (
+              <p className="text-emerald-700 font-medium text-sm">{guest.role}</p>
             )}
             {title && (
               <h3 className="font-serif text-xl text-stone-900 mt-1">{title}</h3>
