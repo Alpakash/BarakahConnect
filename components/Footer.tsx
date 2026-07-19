@@ -39,7 +39,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.linkedin.com/in/mory-kaba-skill-select/"
+                href="https://www.linkedin.com/company/barakahconnect/posts"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Barakah Connect op LinkedIn"
