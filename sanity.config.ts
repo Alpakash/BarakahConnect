@@ -35,10 +35,20 @@ export default defineConfig({
                   .documentId('mainAboutPage')
                   .title('Over Ons Pagina')
               ),
+            // Singleton: Bijeenkomsten Pagina
+            S.listItem()
+              .title('Bijeenkomsten Pagina')
+              .id('eventsPage')
+              .child(
+                S.document()
+                  .schemaType('eventsPage')
+                  .documentId('mainEventsPage')
+                  .title('Bijeenkomsten Pagina')
+              ),
             S.divider(),
             // All other types except Singletons
             ...S.documentTypeListItems().filter(
-              (listItem) => !['homePage', 'aboutPage'].includes(listItem.getId() as string)
+              (listItem) => !['homePage', 'aboutPage', 'eventsPage'].includes(listItem.getId() as string)
             ),
           ]),
     }),
@@ -58,12 +68,12 @@ export default defineConfig({
     types: schemaTypes.types,
     // Verberg singleton documenten van 'Create new' knop
     templates: (templates) =>
-      templates.filter(({ schemaType }) => !['homePage', 'aboutPage'].includes(schemaType)),
+      templates.filter(({ schemaType }) => !['homePage', 'aboutPage', 'eventsPage'].includes(schemaType)),
   },
   document: {
     // Voorkom 'duplicate' en 'delete' acties voor singletons, en 'create' voor submissions in de studio
     actions: (input, context) => {
-      if (['homePage', 'aboutPage'].includes(context.schemaType)) {
+      if (['homePage', 'aboutPage', 'eventsPage'].includes(context.schemaType)) {
         return input.filter(({ action }) => !['duplicate', 'delete'].includes(action as string))
       }
       if (context.schemaType === 'submission') {
