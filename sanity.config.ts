@@ -44,7 +44,10 @@ export default defineConfig({
     }),
     presentationTool({
       previewUrl: {
-        origin: 'http://localhost:3000',
+        // Studio draait op hetzelfde domein als de site zelf (lokaal of live),
+        // dus de huidige origin is altijd de juiste preview-URL. Hardcoded
+        // localhost hier brak de Presentation-tool volledig op de live site.
+        origin: typeof window !== 'undefined' ? window.location.origin : 'https://barakahconnect.nl',
         previewMode: {
           enable: '/api/draft-mode/enable',
         },
