@@ -18,12 +18,20 @@ export default async function Bijeenkomsten() {
     { next: { revalidate: 60 } }
   );
 
+  const pageContent = await client.fetch(
+    `*[_type == "eventsPage"][0]{ title, intro }`,
+    {},
+    { next: { revalidate: 60 } }
+  );
+  const pageTitle = pageContent?.title || 'Onze Bijeenkomsten';
+  const pageIntro = pageContent?.intro || 'Sluit je aan bij onze tweewekelijkse ontbijtsessies. Kom om te netwerken, kennis te delen, of gewoon voor een goed gesprek en lekker eten.';
+
   return (
     <div className="py-24 bg-stone-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="font-serif text-4xl md:text-5xl mb-6 text-stone-900 text-center">Onze Bijeenkomsten</h1>
+        <h1 className="font-serif text-4xl md:text-5xl mb-6 text-stone-900 text-center">{pageTitle}</h1>
         <p className="text-center text-stone-500 mb-8 max-w-2xl mx-auto text-lg leading-relaxed">
-          Sluit je aan bij onze tweewekelijkse ontbijtsessies. Kom om te netwerken, kennis te delen, of gewoon voor een goed gesprek en lekker eten.
+          {pageIntro}
         </p>
         <div className="w-24 h-1 bg-emerald-700 mx-auto mb-16 opacity-50"></div>
 

@@ -35,10 +35,50 @@ export default defineConfig({
                   .documentId('mainAboutPage')
                   .title('Over Ons Pagina')
               ),
+            // Singleton: Bijeenkomsten Pagina
+            S.listItem()
+              .title('Bijeenkomsten Pagina')
+              .id('eventsPage')
+              .child(
+                S.document()
+                  .schemaType('eventsPage')
+                  .documentId('mainEventsPage')
+                  .title('Bijeenkomsten Pagina')
+              ),
+            // Singleton: Contact Pagina
+            S.listItem()
+              .title('Contact Pagina')
+              .id('contactPage')
+              .child(
+                S.document()
+                  .schemaType('contactPage')
+                  .documentId('mainContactPage')
+                  .title('Contact Pagina')
+              ),
+            // Singleton: Pakketten Pagina
+            S.listItem()
+              .title('Pakketten Pagina')
+              .id('pakkettenPage')
+              .child(
+                S.document()
+                  .schemaType('pakkettenPage')
+                  .documentId('mainPakkettenPage')
+                  .title('Pakketten Pagina')
+              ),
+            // Singleton: Aanmelden Pagina
+            S.listItem()
+              .title('Aanmelden Pagina')
+              .id('registerPage')
+              .child(
+                S.document()
+                  .schemaType('registerPage')
+                  .documentId('mainRegisterPage')
+                  .title('Aanmelden Pagina')
+              ),
             S.divider(),
             // All other types except Singletons
             ...S.documentTypeListItems().filter(
-              (listItem) => !['homePage', 'aboutPage'].includes(listItem.getId() as string)
+              (listItem) => !['homePage', 'aboutPage', 'eventsPage', 'contactPage', 'pakkettenPage', 'registerPage'].includes(listItem.getId() as string)
             ),
           ]),
     }),
@@ -58,12 +98,12 @@ export default defineConfig({
     types: schemaTypes.types,
     // Verberg singleton documenten van 'Create new' knop
     templates: (templates) =>
-      templates.filter(({ schemaType }) => !['homePage', 'aboutPage'].includes(schemaType)),
+      templates.filter(({ schemaType }) => !['homePage', 'aboutPage', 'eventsPage', 'contactPage', 'pakkettenPage', 'registerPage'].includes(schemaType)),
   },
   document: {
     // Voorkom 'duplicate' en 'delete' acties voor singletons, en 'create' voor submissions in de studio
     actions: (input, context) => {
-      if (['homePage', 'aboutPage'].includes(context.schemaType)) {
+      if (['homePage', 'aboutPage', 'eventsPage', 'contactPage', 'pakkettenPage', 'registerPage'].includes(context.schemaType)) {
         return input.filter(({ action }) => !['duplicate', 'delete'].includes(action as string))
       }
       if (context.schemaType === 'submission') {
