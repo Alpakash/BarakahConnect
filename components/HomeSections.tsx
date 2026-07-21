@@ -182,7 +182,7 @@ export default function HomeSections({ sections, hideItemHeaders }: { sections: 
                   </svg>
                 </Link>
                 <p className="mt-4 text-stone-500 text-sm">
-                  Met Kosso, Mo Max Pro, Umair Bantvawala en Enriqueo Beerthuizen
+                  Met Kosso, Mo Max Pro en Umair Bantvawala
                 </p>
               </div>
             );
