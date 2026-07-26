@@ -1,6 +1,42 @@
 import { NextResponse } from 'next/server';
-import { writeClient } from '@/sanity/client';
 import nodemailer from 'nodemailer';
+
+const SANITY_PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'z7hlx5cz';
+const SANITY_DATASET = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
+const SANITY_API_VERSION = process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2024-04-20';
+
+async function createSubmissionInSanity(doc: Record<string, unknown>) {
+  const token = process.env.SANITY_API_WRITE_TOKEN;
+
+  const url = `https://${SANITY_PROJECT_ID}.api.sanity.io/v${SANITY_API_VERSION}/data/mutate/${SANITY_DATASET}`;
+
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      mutations: [
+        {
+          create: doc,
+        },
+      ],
+    }),
+  });
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => null);
+    const error = new Error(
+      `Sanity API error (${res.status}): ${JSON.stringify(body)}`
+    );
+    (error as any).statusCode = res.status;
+    (error as any).response = { status: res.status, body };
+    throw error;
+  }
+
+  return res.json();
+}
 
 export async function POST(req: Request) {
   let name = '';
@@ -18,19 +54,17 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Naam en e-mail zijn verplicht' }, { status: 400 });
     }
 
-    // Save to Sanity
-    const doc = {
+    // Save to Sanity via direct HTTP API
+    await createSubmissionInSanity({
       _type: 'submission',
       name,
       email,
-      message,
-      eventTitle,
-      packageName,
+      message: message || '',
+      eventTitle: eventTitle || '',
+      packageName: packageName || '',
       type,
       submittedAt: new Date().toISOString(),
-    };
-
-    await writeClient.create(doc);
+    });
 
     // Send Email Notification
     try {
@@ -103,6 +137,7 @@ export async function POST(req: Request) {
       statusCode: error?.statusCode,
       status: error?.response?.status,
       body: error?.response?.body,
+      bodyString: JSON.stringify(error?.response?.body),
       name: name,
       email: email,
       type: type,
