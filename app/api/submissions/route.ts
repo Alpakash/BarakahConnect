@@ -1,11 +1,18 @@
 import { NextResponse } from 'next/server';
-import { client } from '@/sanity/client';
+import { writeClient } from '@/sanity/client';
 import nodemailer from 'nodemailer';
 
 export async function POST(req: Request) {
+  let name = '';
+  let email = '';
+  let type = '';
+
   try {
     const body = await req.json();
-    const { name, email, message, type, eventTitle, packageName } = body;
+    name = body.name || '';
+    email = body.email || '';
+    const { message, eventTitle, packageName } = body;
+    type = body.type || '';
 
     if (!name || !email) {
       return NextResponse.json({ error: 'Naam en e-mail zijn verplicht' }, { status: 400 });
@@ -14,16 +21,16 @@ export async function POST(req: Request) {
     // Save to Sanity
     const doc = {
       _type: 'submission',
-      name: name,
-      email: email,
-      message: message,
-      eventTitle: eventTitle,
-      packageName: packageName,
-      type: type,
+      name,
+      email,
+      message,
+      eventTitle,
+      packageName,
+      type,
       submittedAt: new Date().toISOString(),
     };
 
-    await client.create(doc);
+    await writeClient.create(doc);
 
     // Send Email Notification
     try {
@@ -91,7 +98,15 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error: any) {
-    console.error('Submission error:', error);
+    console.error('Submission error - details:', {
+      message: error?.message || 'Onbekende fout',
+      statusCode: error?.statusCode,
+      status: error?.response?.status,
+      body: error?.response?.body,
+      name: name,
+      email: email,
+      type: type,
+    });
     return NextResponse.json({ error: 'Er is een interne fout opgetreden bij het verzenden' }, { status: 500 });
   }
 }
