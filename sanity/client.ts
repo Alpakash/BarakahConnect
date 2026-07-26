@@ -1,4 +1,5 @@
 import { createClient } from 'next-sanity'
+import { createClient as createSanityClient } from '@sanity/client'
 import { apiVersion, dataset, projectId, useCdn } from './env'
 
 // Read client met stega voor Visual Editing
@@ -13,8 +14,8 @@ export const client = createClient({
   },
 })
 
-// Write client zonder stega voor mutations (create, patch, delete)
-export const writeClient = createClient({
+// Write client via @sanity/client direct (zonder next-sanity wrapper) voor mutations
+export const writeClient = createSanityClient({
   apiVersion,
   dataset,
   projectId,
