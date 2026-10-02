@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { urlFor } from '../sanity/lib/image'
 import Link from 'next/link'
+import { stegaClean } from 'next-sanity'
 import WeeztixModal from './WeeztixModal'
 import { CalendarIcon, ClockIcon, MapPinIcon } from './icons'
 
@@ -15,7 +16,13 @@ export default function EventCard({ event }: { event: any }) {
         day: 'numeric',
         hour: 'numeric',
         minute: 'numeric',
+        // The server runs in UTC; always show Dutch time
+        timeZone: 'Europe/Amsterdam',
       }).format(new Date(event.date));
+
+  // The title carries invisible Visual Editing (stega) characters; keep them out of the sign-up link
+  const title = stegaClean(event.title);
+  const isFree = event.isFree === true || /\bgratis\b/i.test(title);
 
   return (
     <div className="bg-white rounded-xl overflow-hidden shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all border border-stone-100 group flex flex-col h-full">
@@ -54,12 +61,12 @@ export default function EventCard({ event }: { event: any }) {
         )}
         
         <Link 
-          href={`/aanmelden?event=${encodeURIComponent(event.title)}`} 
+          href={`/aanmelden?event=${encodeURIComponent(title)}${isFree ? '&gratis=1' : ''}`} 
           className="inline-flex items-center justify-center w-full bg-stone-50 hover:bg-emerald-700 text-emerald-700 hover:text-white font-medium py-3 rounded border border-emerald-100/50 hover:border-emerald-700 transition-all mt-auto tracking-wide content-end"
         >
           Meld je aan
         </Link>
-        <WeeztixModal compact />
+        {!isFree && <WeeztixModal compact />}
       </div>
     </div>
   )

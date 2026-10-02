@@ -11,12 +11,20 @@ export const metadata = {
   }
 }
 
+// Calendar date in Dutch time (YYYY-MM-DD), so an event stays listed until the end of the day it takes place
+const dutchDate = (date: string | Date) =>
+  new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Amsterdam' }).format(new Date(date));
+
 export default async function Bijeenkomsten() {
-  const events = await client.fetch(
+  const allEvents = await client.fetch(
     `*[_type == "event"] | order(date asc)`,
     {},
     { next: { revalidate: 60 } }
   );
+
+  // Hide events whose day has passed; events without a date ("Nader te bepalen") stay visible
+  const today = dutchDate(new Date());
+  const events = allEvents.filter((evt: { date?: string }) => !evt.date || dutchDate(evt.date) >= today);
 
   const pageContent = await client.fetch(
     `*[_type == "eventsPage"][0]{ title, intro }`,

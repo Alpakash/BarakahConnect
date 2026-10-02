@@ -33,7 +33,7 @@ function FormInner({ type }: { type: 'Aanmelding Bijeenkomst' | 'Contact' }) {
         body: JSON.stringify(data),
       });
 
-      if (!res.ok) throw new Error('Er is iets misgegaan bij het verzenden.');
+      if (!res.ok) throw new Error('Er is iets misgegaan bij het verzenden. Probeer het later opnieuw of mail ons via info@barakahconnect.nl.');
       setStatus('success');
       (e.target as HTMLFormElement).reset();
     } catch (err: any) {

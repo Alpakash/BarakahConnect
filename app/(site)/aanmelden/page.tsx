@@ -11,7 +11,14 @@ export const metadata = {
   }
 }
 
-export default async function Aanmelden() {
+export default async function Aanmelden({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  // Signing up for a free event: there are no tickets to buy, so leave out the Weeztix section
+  const isFreeEvent = (await searchParams).gratis === '1';
+
   const pageContent = await client.fetch(
     `*[_type == "registerPage"][0]{ title, intro, ticketsTitle, ticketsText }`,
     {},
@@ -36,14 +43,16 @@ export default async function Aanmelden() {
           <SubmissionForm type="Aanmelding Bijeenkomst" />
         </div>
 
-        <div className="mt-16 pt-12 border-t border-stone-200">
-          <h2 className="font-serif text-3xl md:text-4xl mb-4 text-stone-900 text-center">{ticketsTitle}</h2>
-          <p className="text-center text-stone-500 mb-8 max-w-xl mx-auto text-lg leading-relaxed">
-            {ticketsText}
-          </p>
-          <div className="w-24 h-1 bg-emerald-700 mx-auto mb-12 opacity-50"></div>
-          <WeeztixModal />
-        </div>
+        {!isFreeEvent && (
+          <div className="mt-16 pt-12 border-t border-stone-200">
+            <h2 className="font-serif text-3xl md:text-4xl mb-4 text-stone-900 text-center">{ticketsTitle}</h2>
+            <p className="text-center text-stone-500 mb-8 max-w-xl mx-auto text-lg leading-relaxed">
+              {ticketsText}
+            </p>
+            <div className="w-24 h-1 bg-emerald-700 mx-auto mb-12 opacity-50"></div>
+            <WeeztixModal />
+          </div>
+        )}
       </div>
     </div>
   )

@@ -18,6 +18,12 @@ export const eventType = defineType({
       description: 'Laat leeg als de datum "Nader te bepalen" is.',
     }),
     defineField({
+      name: 'isFree',
+      title: 'Gratis bijeenkomst',
+      type: 'boolean',
+      description: 'Zet aan als er geen tickets nodig zijn: de knop "Koop tickets" wordt dan niet getoond. Staat "gratis" in de titel, dan gebeurt dit automatisch.',
+    }),
+    defineField({
       name: 'location',
       title: 'Locatie',
       type: 'string',
