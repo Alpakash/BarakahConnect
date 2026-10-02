@@ -1,8 +1,15 @@
 'use client'
 
-import { VisualEditing } from '@sanity/visual-editing/react'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+
+// Loaded on demand: this wrapper only renders in Draft Mode, and a static import
+// would ship the Visual Editing library to every public page.
+const VisualEditing = dynamic(
+  () => import('@sanity/visual-editing/react').then((mod) => mod.VisualEditing),
+  { ssr: false }
+)
 
 export default function VisualEditingWrapper() {
   const router = useRouter()
