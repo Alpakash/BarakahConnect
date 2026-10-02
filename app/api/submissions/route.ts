@@ -6,6 +6,11 @@ const SANITY_PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'z7hlx5cz
 const SANITY_DATASET = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
 const SANITY_API_VERSION = process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2024-04-20';
 
+// Submissions hold personal data. The dataset is public, but Sanity only serves documents whose
+// _id contains a dot to authenticated requests (Studio users, tokens), so every submission is
+// created under this path. scripts/migrate-submissions.mjs moves older submissions here as well.
+const SUBMISSION_ID_PREFIX = 'submissions.';
+
 async function createSubmissionInSanity(doc: Record<string, unknown>) {
   const token = process.env.SANITY_API_WRITE_TOKEN;
   if (!token) {
@@ -75,6 +80,7 @@ export async function POST(req: Request) {
     let sanityError = '';
     try {
       await createSubmissionInSanity({
+        _id: `${SUBMISSION_ID_PREFIX}${crypto.randomUUID()}`,
         _type: 'submission',
         name,
         email,

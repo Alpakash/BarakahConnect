@@ -96,12 +96,15 @@ export default defineConfig({
   ],
   schema: {
     types: schemaTypes.types,
-    // Verberg singleton documenten van 'Create new' knop
+    // Verberg singleton documenten van 'Create new' knop. Inzendingen ook: die komen alleen via het
+    // formulier binnen, onder een privé-id ('submissions.…', zie app/api/submissions/route.ts). Een
+    // in Studio aangemaakte inzending krijgt een id zonder punt en is dan voor iedereen leesbaar.
     templates: (templates) =>
-      templates.filter(({ schemaType }) => !['homePage', 'aboutPage', 'eventsPage', 'contactPage', 'pakkettenPage', 'registerPage'].includes(schemaType)),
+      templates.filter(({ schemaType }) => !['homePage', 'aboutPage', 'eventsPage', 'contactPage', 'pakkettenPage', 'registerPage', 'submission'].includes(schemaType)),
   },
   document: {
-    // Voorkom 'duplicate' en 'delete' acties voor singletons, en 'create' voor submissions in de studio
+    // Voorkom 'duplicate' en 'delete' acties voor singletons, en 'duplicate' voor submissions
+    // (een kopie krijgt net als een nieuw aangemaakte inzending een publiek id)
     actions: (input, context) => {
       if (['homePage', 'aboutPage', 'eventsPage', 'contactPage', 'pakkettenPage', 'registerPage'].includes(context.schemaType)) {
         return input.filter(({ action }) => !['duplicate', 'delete'].includes(action as string))
