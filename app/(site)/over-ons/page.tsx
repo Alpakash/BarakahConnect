@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { client } from '@/sanity/client';
+import { sanityFetch } from '@/sanity/lib/fetch';
 import { urlFor } from '@/sanity/lib/image';
-import { draftMode } from 'next/headers';
 import { HandshakeIcon, LightbulbIcon, MoonStarIcon } from '@/components/icons';
 
 export const metadata = {
@@ -38,14 +37,7 @@ const DEFAULTS = {
 };
 
 export default async function OverOns() {
-  const { isEnabled } = await draftMode()
-  const content = await client
-    .withConfig({
-      useCdn: !isEnabled,
-      perspective: isEnabled ? 'drafts' : 'published',
-      stega: isEnabled
-    })
-    .fetch(`*[_type == "aboutPage"][0]`, {}, { stega: isEnabled }) || {};
+  const content = await sanityFetch({ query: `*[_type == "aboutPage"][0]` }) || {};
   const pageTitle = content.title || "Over Barakah Connect";
   const blocks = content.blocks || [];
 

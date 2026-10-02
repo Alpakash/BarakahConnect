@@ -1,5 +1,4 @@
-import { client } from '@/sanity/client';
-import { draftMode } from 'next/headers';
+import { sanityFetch } from '@/sanity/lib/fetch';
 import HomeSections from '@/components/HomeSections';
 
 export const metadata = {
@@ -12,26 +11,16 @@ export const metadata = {
 }
 
 export default async function LidWorden() {
-  const { isEnabled } = await draftMode()
-
   // Fetch content specifically for the membership page or fallback to homepage memberships
   // For now, we allow the user to manage it via a block on a 'singleton' or similar.
   // To keep it simple and consistent with our builder, we'll look for a membershipSection.
-  const content = await client
-    .withConfig({
-      useCdn: !isEnabled,
-      perspective: isEnabled ? 'drafts' : 'published',
-      stega: isEnabled
-    })
-    .fetch(`*[_type == "homePage"][0]`, {}, { stega: isEnabled }) || {};
+  const content = await sanityFetch({ query: `*[_type == "homePage"][0]` }) || {};
 
   const sections = content.sections?.filter((s: any) => s._type === 'membershipSection') || [];
 
-  const pageContent = await client.fetch(
-    `*[_type == "pakkettenPage"][0]{ title, subtitle, reasonsTitle, reasons }`,
-    {},
-    { next: { revalidate: 60 } }
-  );
+  const pageContent = await sanityFetch({
+    query: `*[_type == "pakkettenPage"][0]{ title, subtitle, reasonsTitle, reasons }`,
+  });
 
   const pageTitle = pageContent?.title || 'Pakketten';
   const pageSubtitle = pageContent?.subtitle || 'Klaar om te groeien? Kies het pakket dat bij jouw doelen past.';

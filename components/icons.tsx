@@ -1,6 +1,8 @@
 // Consistente lijn-icoonset ter vervanging van emoji, die niet aansluiten bij
 // de rest van de (vector/serif) vormtaal van de site.
 
+import { stegaClean } from 'next-sanity';
+
 type IconProps = { className?: string };
 
 export function HandshakeIcon({ className }: IconProps) {
@@ -80,6 +82,7 @@ export function ClockIcon({ className }: IconProps) {
 
 // Vertaalt de emoji die al als data in Sanity staan (featuresSection.items[].emoji)
 // naar het bijpassende icoon, zodat bestaande content automatisch meegaat zonder migratie.
+// In Draft Mode bevat de emoji onzichtbare stega-tekens; stegaClean haalt die weg voor het opzoeken.
 const EMOJI_ICON_MAP: Record<string, (props: IconProps) => React.JSX.Element> = {
   '🤝': HandshakeIcon,
   '💡': LightbulbIcon,
@@ -87,6 +90,6 @@ const EMOJI_ICON_MAP: Record<string, (props: IconProps) => React.JSX.Element> = 
 };
 
 export function ResolvedIcon({ emoji, className }: { emoji?: string; className?: string }) {
-  const Icon = (emoji && EMOJI_ICON_MAP[emoji.trim()]) || SparkleIcon;
+  const Icon = (emoji && EMOJI_ICON_MAP[stegaClean(emoji).trim()]) || SparkleIcon;
   return <Icon className={className} />;
 }

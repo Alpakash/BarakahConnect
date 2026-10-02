@@ -1,5 +1,5 @@
-import { client } from '@/sanity/client';
-import { draftMode } from 'next/headers';
+import { stegaClean } from 'next-sanity';
+import { sanityFetch } from '@/sanity/lib/fetch';
 import HomeSections from '@/components/HomeSections';
 import Hero from '@/components/Hero';
 import { HandshakeIcon, LightbulbIcon, MoonStarIcon } from '@/components/icons';
@@ -7,33 +7,24 @@ import { HandshakeIcon, LightbulbIcon, MoonStarIcon } from '@/components/icons';
 export const revalidate = 60;
 
 export default async function Home() {
-  const { isEnabled } = await draftMode()
-  
   // Fetch the new sections array (Page Builder)
-  const content = await client
-    .withConfig({ 
-      useCdn: !isEnabled, 
-      perspective: isEnabled ? 'drafts' : 'published',
-      stega: isEnabled
-    })
-    .fetch(
-      `*[_type == "homePage"][0]{
+  const content = await sanityFetch({
+    query: `*[_type == "homePage"][0]{
+      ...,
+      sections[]{
         ...,
-        sections[]{
-          ...,
-          guest->{ _id, name, role, bio, photo, video{ asset-> { url } }, socialLink }
-        }
-      }`,
-      {},
-      { stega: isEnabled }
-    ) || {};
+        guest->{ _id, name, role, bio, photo, video{ asset-> { url } }, socialLink }
+      }
+    }`,
+  }) || {};
 
   // Pakketten heeft een eigen pagina (/lid-worden), dus niet nogmaals tonen op de homepage.
   // De uitnodigingsvideo "15 jaar aan ondernemen" is op verzoek verborgen; het blok kan ook
   // direct in Studio (Home Pagina -> Pagina Indeling) verwijderd worden.
+  // stegaClean: in Draft Mode bevat de naam onzichtbare tekens, waardoor de vergelijking anders mislukt.
   const sections = (content.sections || []).filter((section: any) => {
     if (section._type === 'membershipSection') return false;
-    if (section._type === 'promoVideoSection' && section.guest?.name === '15 jaar aan ondernemen') return false;
+    if (section._type === 'promoVideoSection' && stegaClean(section.guest?.name) === '15 jaar aan ondernemen') return false;
     return true;
   });
 

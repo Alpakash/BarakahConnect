@@ -1,6 +1,6 @@
 import SubmissionForm from "@/components/SubmissionForm";
 import { MailIcon, MapPinIcon, PhoneIcon } from "@/components/icons";
-import { client } from "@/sanity/client";
+import { sanityFetch } from "@/sanity/lib/fetch";
 
 export const metadata = {
   title: 'Contact',
@@ -12,11 +12,9 @@ export const metadata = {
 }
 
 export default async function Contact() {
-  const pageContent = await client.fetch(
-    `*[_type == "contactPage"][0]{ title, intro, email, phone, location }`,
-    {},
-    { next: { revalidate: 60 } }
-  );
+  const pageContent = await sanityFetch({
+    query: `*[_type == "contactPage"][0]{ title, intro, email, phone, location }`,
+  });
 
   const pageTitle = pageContent?.title || 'Neem Contact Op';
   const pageIntro = pageContent?.intro || 'Heb je vragen over Barakah Connect, wil je samenwerken, of ben je op zoek naar meer informatie? Laat gerust een bericht achter, we proberen zo snel mogelijk te reageren.';

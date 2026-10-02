@@ -1,6 +1,6 @@
 import SubmissionForm from "@/components/SubmissionForm";
 import WeeztixModal from "@/components/WeeztixModal";
-import { client } from "@/sanity/client";
+import { sanityFetch } from "@/sanity/lib/fetch";
 
 export const metadata = {
   title: 'Aanmelden',
@@ -19,11 +19,9 @@ export default async function Aanmelden({
   // Signing up for a free event: there are no tickets to buy, so leave out the Weeztix section
   const isFreeEvent = (await searchParams).gratis === '1';
 
-  const pageContent = await client.fetch(
-    `*[_type == "registerPage"][0]{ title, intro, ticketsTitle, ticketsText }`,
-    {},
-    { next: { revalidate: 60 } }
-  );
+  const pageContent = await sanityFetch({
+    query: `*[_type == "registerPage"][0]{ title, intro, ticketsTitle, ticketsText }`,
+  });
 
   const pageTitle = pageContent?.title || 'Meld je aan';
   const pageIntro = pageContent?.intro || 'Sluit je aan bij ons netwerk en blijf op de hoogte van onze aankomende bijeenkomsten. We kijken ernaar uit je te ontmoeten!';

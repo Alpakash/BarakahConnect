@@ -2,14 +2,15 @@ import { createClient } from 'next-sanity'
 import { createClient as createSanityClient } from '@sanity/client'
 import { apiVersion, dataset, projectId, useCdn } from './env'
 
-// Read client met stega voor Visual Editing
+// Read client. Stega (onzichtbare tekens voor Visual Editing) staat standaard uit;
+// sanityFetch zet het alleen aan in Draft Mode, zodat bezoekers schone teksten krijgen.
 export const client = createClient({
   apiVersion,
   dataset,
   projectId,
   useCdn,
   stega: {
-    enabled: true,
+    enabled: false,
     studioUrl: '/studio',
   },
 })

@@ -20,7 +20,7 @@ export default function EventCard({ event }: { event: any }) {
         timeZone: 'Europe/Amsterdam',
       }).format(new Date(event.date));
 
-  // The title carries invisible Visual Editing (stega) characters; keep them out of the sign-up link
+  // In Draft Mode the title carries invisible Visual Editing (stega) characters; keep them out of the sign-up link
   const title = stegaClean(event.title);
   const isFree = event.isFree === true || /\bgratis\b/i.test(title);
 

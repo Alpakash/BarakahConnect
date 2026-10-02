@@ -1,6 +1,6 @@
 import EventCard from "@/components/EventCard";
 import { CalendarIcon } from "@/components/icons";
-import { client } from "@/sanity/client";
+import { sanityFetch } from "@/sanity/lib/fetch";
 
 export const metadata = {
   title: 'Bijeenkomsten',
@@ -16,21 +16,13 @@ const dutchDate = (date: string | Date) =>
   new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Amsterdam' }).format(new Date(date));
 
 export default async function Bijeenkomsten() {
-  const allEvents = await client.fetch(
-    `*[_type == "event"] | order(date asc)`,
-    {},
-    { next: { revalidate: 60 } }
-  );
+  const allEvents = await sanityFetch({ query: `*[_type == "event"] | order(date asc)` });
 
   // Hide events whose day has passed; events without a date ("Nader te bepalen") stay visible
   const today = dutchDate(new Date());
   const events = allEvents.filter((evt: { date?: string }) => !evt.date || dutchDate(evt.date) >= today);
 
-  const pageContent = await client.fetch(
-    `*[_type == "eventsPage"][0]{ title, intro }`,
-    {},
-    { next: { revalidate: 60 } }
-  );
+  const pageContent = await sanityFetch({ query: `*[_type == "eventsPage"][0]{ title, intro }` });
   const pageTitle = pageContent?.title || 'Onze Bijeenkomsten';
   const pageIntro = pageContent?.intro || 'Sluit je aan bij onze tweewekelijkse ontbijtsessies. Kom om te netwerken, kennis te delen, of gewoon voor een goed gesprek en lekker eten.';
 
