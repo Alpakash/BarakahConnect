@@ -17,7 +17,7 @@ Voor de beheerder van barakahconnect.nl. Eén keer lezen is genoeg.
    - **Locatie**, **Beschrijving** en **Afbeelding**: optioneel.
 3. Klik rechtsonder op **Publiceren**. Nu staat de bijeenkomst op de website.
 
-Zolang je niet op Publiceren klikt, is het een concept: alleen jij ziet het. Je wijzigingen worden
+Zolang je niet op Publiceren klikt, is het een concept dat nog niet op de website staat. Je wijzigingen worden
 vanzelf bewaard, ook als je het venster sluit.
 
 ## Iets aanpassen of weghalen

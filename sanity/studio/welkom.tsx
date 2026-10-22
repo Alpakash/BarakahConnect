@@ -23,7 +23,7 @@ function KnopNaar({ text, icon, intent, params, tone }: {
 const STAPPEN = [
   ['Klik op "Nieuwe bijeenkomst"', 'Je krijgt een leeg formulier.'],
   ['Vul het formulier in', 'Alleen de titel is verplicht. Weet je de datum nog niet? Laat hem leeg, dan staat er "Nader te bepalen".'],
-  ['Klik rechtsonder op "Publiceren"', 'Pas dan staat de bijeenkomst op de website. Tot die tijd is het een concept dat alleen jij ziet.'],
+  ['Klik rechtsonder op "Publiceren"', 'Pas dan staat de bijeenkomst op de website. Tot die tijd is het een concept dat nog niet op de website staat.'],
 ] as const
 
 function Welkom() {
