@@ -13,7 +13,10 @@
   "dependencies": {
     "@portabletext/react": "^6.0.3",
     "@sanity/client": "^7.21.0",
+    "@sanity/icons": "3.7.4",
     "@sanity/image-url": "^2.1.1",
+    "@sanity/locale-nl-nl": "^1.1.40",
+    "@sanity/ui": "3.1.14",
     "@sanity/visual-editing": "^5.3.4",
     "@types/nodemailer": "^8.0.0",
     "dotenv": "^17.4.2",

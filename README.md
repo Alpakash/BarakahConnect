@@ -56,6 +56,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - `components/` - Reusable UI components
 - `styles/` - Global styles and Tailwind configuration
 - `public/` - Static assets
+- `sanity/schemaTypes/` - Content types; `sanity/studio/` - Studio setup (menu, start screen, drafts-only)
+- `HANDLEIDING-STUDIO.md` - Dutch guide for the editor: putting an event online
 
 ## 📦 Deployment
 
