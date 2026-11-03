@@ -16,7 +16,7 @@ const dutchDate = (date: string | Date) =>
   new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Amsterdam' }).format(new Date(date));
 
 export default async function Bijeenkomsten() {
-  const allEvents = await sanityFetch({ query: `*[_type == "event"] | order(date asc)` });
+  const allEvents = await sanityFetch({ query: `*[_type == "event"] | order(date asc){ ..., "eventPageSlug": eventPage->slug.current }` });
 
   // Hide events whose day has passed; events without a date ("Nader te bepalen") stay visible
   const today = dutchDate(new Date());

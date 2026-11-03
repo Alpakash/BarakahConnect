@@ -30,6 +30,27 @@ vanzelf bewaard, ook als je het venster sluit.
 Een bijeenkomst waarvan de datum voorbij is, verdwijnt de dag erna vanzelf van de website. Je hoeft
 hem niet te verwijderen.
 
+## Een eventpagina met eigen link
+
+Voor een groter event met sprekers en programma maak je een eigen pagina met een link om te delen via
+WhatsApp, Instagram en LinkedIn, bijvoorbeeld **barakahconnect.nl/ramadan-event**.
+
+1. Klik op het scherm **Start** op **Nieuwe eventpagina**.
+2. Tabblad **Basis**: vul **Titel**, **Link** (klik op "Genereer" om hem uit de titel te maken), **Datum**,
+   **Tijden** (één regel per tijd) en **Introductie** in, en upload de **Flyer**. De flyer staat in zijn geheel
+   op de pagina en is ook het plaatje dat mensen zien als je de link deelt.
+3. Tabblad **Sprekers**: per spreker naam, functie, onderwerp, korte omschrijving en foto. Kies een kleur voor het
+   tekstblok. Klik bij de foto op het potloodje en zet de **hotspot** op het gezicht.
+4. Tabblad **Programma**: één onderdeel per tijdsblok. Zet **Rustig blok** aan voor inloop en pauze.
+5. Tabblad **Locatie en tickets**: adres, praktische informatie (parkeren, OV) en de tekst boven de ticketshop.
+   Gratis event? Zet **Gratis event** aan, dan staat er geen ticketshop op de pagina.
+6. Klik op **Publiceren**. Binnen een minuut staat de pagina online op de link die je koos.
+7. Open de bijeenkomst van dit event (onder **Bijeenkomsten**) en kies bij **Eventpagina** de pagina die je net
+   maakte. De kaart op /bijeenkomsten krijgt dan de knop "Bekijk het programma".
+
+Na de datum van het event verdwijnt de ticketshop vanzelf van de pagina; de pagina zelf blijft bereikbaar tot je
+hem verwijdert.
+
 ## Overige onderdelen
 
 Onder **Inhoud** vind je ook:
