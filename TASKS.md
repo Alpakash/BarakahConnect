@@ -17,3 +17,4 @@
 - Na zondag 13 december 2026: `/e-commerce-event` opruimen. Haal de pagina weg of stuur hem door naar `/bijeenkomsten`, en haal de regel uit `app/sitemap.ts`. (Reviewtip PR #18)
 - Foto Ustadh Mohamed Akkouh: nu uit de flyer gesneden (322 px breed, op mobiel zacht). Vervangen door het originele bestand met kantoorachtergrond zodra de ontwerper dat levert.
 - Opdrachtgever laat de zelfgeschreven teksten nalezen: de omschrijvingen van Ustadh, Soufiane en Walid, de introzin "Je gaat naar huis met…" en "Businesscoach" bij Nassira.
+- README.md bijwerken: het noemt Node.js 20+ (Vercel draait 24.x), een placeholder-kloon-URL (`your-username/barakah-connect`) en een verplichte `.env.local`. Laat hem verwijzen naar `docs/OVERDRACHT.md`. (Reviewtip PR #20)
