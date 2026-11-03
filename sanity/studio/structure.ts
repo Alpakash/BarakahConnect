@@ -1,4 +1,4 @@
-import { CalendarIcon, DocumentsIcon, EnvelopeIcon, UsersIcon } from '@sanity/icons'
+import { CalendarIcon, DocumentIcon, DocumentsIcon, EnvelopeIcon, UsersIcon } from '@sanity/icons'
 import type { StructureResolver } from 'sanity/structure'
 
 // Vaste pagina's: precies één document per pagina, met een vast id. Niet aan te maken, te
@@ -20,6 +20,7 @@ export const structure: StructureResolver = (S) =>
     .title('Inhoud')
     .items([
       S.documentTypeListItem('event').title('Bijeenkomsten').icon(CalendarIcon),
+      S.documentTypeListItem('eventPage').title("Eventpagina's").icon(DocumentIcon),
       S.documentTypeListItem('speaker').title('Sprekers en gasten').icon(UsersIcon),
       S.documentTypeListItem('submission').title('Aanmeldingen en berichten').icon(EnvelopeIcon),
       S.divider(),

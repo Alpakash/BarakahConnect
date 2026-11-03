@@ -38,6 +38,7 @@ function Welkom() {
 
           <Flex gap={3} wrap="wrap">
             <KnopNaar text="Nieuwe bijeenkomst" icon={AddIcon} intent="create" params={{ type: 'event' }} tone="primary" />
+            <KnopNaar text="Nieuwe eventpagina" icon={AddIcon} intent="create" params={{ type: 'eventPage' }} />
             <KnopNaar text="Nieuwe spreker" icon={AddIcon} intent="create" params={{ type: 'speaker' }} />
           </Flex>
 
@@ -60,6 +61,11 @@ function Welkom() {
             <Text size={1} muted>
               Iets aanpassen of weghalen? Klik bovenaan op &quot;Inhoud&quot; en dan op &quot;Bijeenkomsten&quot;. Een
               bijeenkomst waarvan de datum voorbij is, verdwijnt vanzelf van de website.
+            </Text>
+            <Text size={1} muted>
+              Groot event met sprekers en programma? Maak een &quot;Nieuwe eventpagina&quot;: die krijgt een eigen
+              link om te delen (bijv. barakahconnect.nl/ramadan-event), met flyer, sprekers, programma, locatie en
+              tickets. Koppel hem daarna aan de bijeenkomst, dan linkt de kaart op de website ernaartoe.
             </Text>
             <Text size={1} muted>
               Teksten van de pagina&apos;s zelf (Home, Over ons, Contact…) staan onder &quot;Inhoud&quot; →

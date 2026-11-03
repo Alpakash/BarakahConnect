@@ -60,6 +60,14 @@ export default function EventCard({ event }: { event: any }) {
            </p>
         )}
         
+        {event.eventPageSlug && (
+          <Link
+            href={`/${stegaClean(event.eventPageSlug)}`}
+            className="inline-flex items-center justify-center w-full bg-emerald-700 hover:bg-emerald-800 text-white font-medium py-3 rounded transition-all mb-3"
+          >
+            Bekijk het programma
+          </Link>
+        )}
         <Link 
           href={`/aanmelden?event=${encodeURIComponent(title)}${isFree ? '&gratis=1' : ''}`} 
           className="inline-flex items-center justify-center w-full bg-stone-50 hover:bg-emerald-700 text-emerald-700 hover:text-white font-medium py-3 rounded border border-emerald-100/50 hover:border-emerald-700 transition-all mt-auto tracking-wide content-end"
