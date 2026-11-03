@@ -39,8 +39,8 @@ export default function WeeztixModal({ compact }: { compact?: boolean }) {
           onClick={open}
           className={
             compact
-              ? 'inline-flex items-center justify-center w-full bg-emerald-700 hover:bg-emerald-800 text-white font-medium py-3 rounded transition-all gap-2 mt-3'
-              : 'bg-emerald-700 hover:bg-emerald-800 px-10 py-4 rounded-lg font-medium text-white shadow-lg transition-all inline-flex items-center gap-2 hover:-translate-y-0.5 text-lg'
+              ? 'inline-flex items-center justify-center w-full bg-emerald-700 hover:bg-emerald-800 text-white font-semibold py-3 rounded-full transition-colors gap-2 mt-3'
+              : 'bg-emerald-700 hover:bg-emerald-800 px-10 py-4 rounded-full font-semibold text-white shadow-lg transition-all inline-flex items-center gap-2 hover:-translate-y-0.5 text-lg'
           }
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
