@@ -37,16 +37,17 @@ pnpm dev        # http://localhost:3000, Studio op http://localhost:3000/studio
 ```
 
 Voor de site zelf heb je geen `.env.local` nodig: project-id en dataset van Sanity hebben ingebouwde standaardwaarden in
-`sanity/env.ts`. De hulpscripts in `scripts/` hebben die standaardwaarden niet en hebben `NEXT_PUBLIC_SANITY_PROJECT_ID`
-en `NEXT_PUBLIC_SANITY_DATASET` wel nodig in `.env.local`. `README.md` is op onderdelen verouderd (Node 20+, een
+`sanity/env.ts`. `seed-content.mjs` en `add-promo-videos.mjs` in `scripts/` hebben die standaardwaarden niet en hebben
+`NEXT_PUBLIC_SANITY_PROJECT_ID` en `NEXT_PUBLIC_SANITY_DATASET` wel nodig in `.env.local`. `migrate-submissions.mjs` valt
+net als de site terug op `z7hlx5cz` en `production` en schrijft dus zonder die variabelen meteen op de live dataset. `README.md` is op onderdelen verouderd (Node 20+, een
 placeholder-kloon-URL, een verplichte `.env.local`); volg dit document en werk de README bij in een kleine vervolg-PR. Andere commando's: `pnpm build`, `pnpm start`, `pnpm lint`. Er zijn geen geautomatiseerde tests.
 
 ### Omgevingsvariabelen (alleen de namen)
 
 | Naam | Waarvoor | Verplicht |
 |---|---|---|
-| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Sanity-project; valt terug op `z7hlx5cz` | nee voor de site, ja voor de scripts |
-| `NEXT_PUBLIC_SANITY_DATASET` | Sanity-dataset; valt terug op `production` | nee voor de site, ja voor de scripts |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Sanity-project; valt terug op `z7hlx5cz` | nee voor de site, ja voor seed en promo-video's |
+| `NEXT_PUBLIC_SANITY_DATASET` | Sanity-dataset; valt terug op `production` | nee voor de site, ja voor seed en promo-video's |
 | `NEXT_PUBLIC_SANITY_API_VERSION` | API-versie; valt terug op `2024-04-20` | nee |
 | `SANITY_API_WRITE_TOKEN` | Schrijftoken (Editor). Slaat formulierinzendingen op in Sanity; ook voor de scripts. Zonder dit komen inzendingen alleen per e-mail binnen. | nee, maar zonder token komen inzendingen alleen per mail binnen |
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` | Mailserver voor de meldingsmail (poort standaard 465) | nee, maar zonder mail komen inzendingen alleen in Sanity |
@@ -125,7 +126,7 @@ Let op:
 
 Er is geen CONTRIBUTING-bestand; dit is wat de geschiedenis laat zien:
 
-- Werk gaat via een branch en een pull request op `main`; alle 18 eerdere PR's zijn zo gemerged. Branches heten
+- Werk gaat via een branch en een pull request op `main`; alle eerdere PR's zijn zo gemerged. Branches heten
   `feat/…` of `claude/…`. Commitberichten zijn in het Nederlands of Engels, vaak met `feat:` of `fix:` ervoor.
 - Een PR krijgt automatisch een Vercel-preview en een GitGuardian-check; die moeten groen zijn.
 - De checks `review/claude` en `review/klaar` op eerdere PR's komen uit de werkwijze van de vorige beheerder en zijn niet
