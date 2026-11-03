@@ -69,7 +69,8 @@ export default function EventLanding({
 
   return (
     <div className={`${fraunces.variable} bg-[#f7f2e8] text-[#16281c]`}>
-      {jsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />}
+      {/* < escapen: tekst uit Sanity mag het script-blok niet kunnen afsluiten met </script> */}
+      {jsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />}
 
       {/* 1. Flyer en introductie */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16 md:pt-16 md:pb-24">
