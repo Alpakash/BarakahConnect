@@ -48,7 +48,9 @@ WhatsApp, Instagram en LinkedIn, bijvoorbeeld **barakahconnect.nl/ramadan-event*
    "Bestel je ticket" in plaats van de algemene ticketshop.
 6. Klik op **Publiceren**. Binnen een minuut staat de pagina online op de link die je koos.
 7. Open de bijeenkomst van dit event (onder **Bijeenkomsten**) en kies bij **Eventpagina** de pagina die je net
-   maakte. De kaart op /bijeenkomsten krijgt dan de knop "Bekijk het programma".
+   maakte. Op /bijeenkomsten zijn foto en titel van de kaart dan klikbaar naar die pagina, en er komt een knop
+   "Bekijk het programma" bij. Staat de pagina niet in de lijst (zoals /e-commerce-event voor 13 december)? Vul
+   dan bij **Link naar eventpagina** het adres in, bijvoorbeeld `/e-commerce-event`.
 
 Na de datum van het event verdwijnt de ticketshop vanzelf van de pagina; de pagina zelf blijft bereikbaar tot je
 hem verwijdert. Verwijderen kan altijd; de knop op de kaart bij /bijeenkomsten verdwijnt dan vanzelf.
