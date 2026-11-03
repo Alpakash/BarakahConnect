@@ -5,11 +5,14 @@ import { dutchToday } from '@/sanity/lib/eventPage'
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://barakahconnect.nl'
   // Eventpagina's uit Sanity zolang het event nog moet plaatsvinden
-  const eventPages = await client.fetch<{ slug: string; _updatedAt: string }[]>(
-    `*[_type == "eventPage" && defined(slug.current) && date >= $today]{ "slug": slug.current, _updatedAt }`,
-    { today: dutchToday() },
-    { perspective: 'published', next: { revalidate: 3600 } },
-  )
+  // Hapert Sanity, dan blijven de vaste pagina's in de sitemap staan
+  const eventPages = await client
+    .fetch<{ slug: string; _updatedAt: string }[]>(
+      `*[_type == "eventPage" && defined(slug.current) && date >= $today]{ "slug": slug.current, _updatedAt }`,
+      { today: dutchToday() },
+      { perspective: 'published', next: { revalidate: 3600 } },
+    )
+    .catch(() => [])
   return [
     ...eventPages.map((page) => ({
       url: `${baseUrl}/${page.slug}`,

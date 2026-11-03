@@ -6,7 +6,7 @@ import { urlFor } from './image'
 // van components/EventLanding.tsx.
 
 export const EVENT_PAGE_QUERY = `*[_type == "eventPage" && slug.current == $slug][0]{
-  title, "slug": slug.current, date, times, intro, address, locationNotes, isFree, ticketsText,
+  title, "slug": slug.current, date, times, intro, address, locationNotes, isFree, ticketsText, ticketUrl,
   flyer{ alt, asset->{ _id, metadata{ dimensions{ width, height } } } },
   speakers[]{ name, role, topic, text, photo, panel, badge },
   program[]{ time, title, text, audience, muted, list }
@@ -15,13 +15,14 @@ export const EVENT_PAGE_QUERY = `*[_type == "eventPage" && slug.current == $slug
 export type EventPageDoc = {
   title: string
   slug: string
-  date: string
+  date?: string
   times?: string[]
   intro?: string
   address?: string
   locationNotes?: string[]
   isFree?: boolean
   ticketsText?: string
+  ticketUrl?: string
   flyer?: { alt?: string; asset?: { _id: string; metadata?: { dimensions?: { width: number; height: number } } } }
   speakers?: { name?: string; role?: string; topic?: string; text?: string; photo?: { asset?: { _ref: string }; hotspot?: object; crop?: object }; panel?: string; badge?: string }[]
   program?: { time?: string; title?: string; text?: string; audience?: string; muted?: boolean; list?: string[] }[]
@@ -31,7 +32,8 @@ export type EventPageDoc = {
 export const dutchToday = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Amsterdam' }).format(new Date())
 
 // "2026-12-13" → "Zondag 13 december 2026". De datum is een kalenderdag zonder tijd, dus in UTC lezen.
-export function formatEventDate(date: string) {
+export function formatEventDate(date?: string) {
+  if (!date) return 'Datum volgt'
   const label = new Intl.DateTimeFormat('nl-NL', {
     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC',
   }).format(new Date(`${stegaClean(date)}T00:00:00Z`))
@@ -53,7 +55,7 @@ export function toEventLandingProps(doc: EventPageDoc): EventLandingProps {
   const dateLabel = formatEventDate(doc.date)
   const flyer = flyerImage(doc.flyer)
   // Na de dag van het event geen ticketshop meer
-  const isPast = stegaClean(doc.date) < dutchToday()
+  const isPast = !!doc.date && stegaClean(doc.date) < dutchToday()
   const address = doc.address || ''
 
   return {
@@ -87,13 +89,13 @@ export function toEventLandingProps(doc: EventPageDoc): EventLandingProps {
         list: p.list,
       })),
     locationNotes: (doc.locationNotes || []).filter(Boolean),
-    tickets: { show: !doc.isFree && !isPast, text: doc.ticketsText },
+    tickets: { show: !doc.isFree && !isPast, text: doc.ticketsText, url: stegaClean(doc.ticketUrl) || undefined },
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'Event',
       name: stegaClean(doc.title),
       description: stegaClean(doc.intro),
-      startDate: stegaClean(doc.date),
+      ...(doc.date && { startDate: stegaClean(doc.date) }),
       eventStatus: 'https://schema.org/EventScheduled',
       eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
       location: { '@type': 'Place', name: stegaClean(address), address: stegaClean(address) },
@@ -101,7 +103,7 @@ export function toEventLandingProps(doc: EventPageDoc): EventLandingProps {
       organizer: { '@type': 'Organization', name: 'Barakah Connect', url: 'https://barakahconnect.nl' },
       performer: (doc.speakers || []).filter((s) => s.name).map((s) => ({ '@type': 'Person', name: stegaClean(s.name) })),
       ...(!doc.isFree && {
-        offers: { '@type': 'Offer', url: `https://barakahconnect.nl/${stegaClean(doc.slug)}#tickets`, availability: 'https://schema.org/InStock', validThrough: stegaClean(doc.date) },
+        offers: { '@type': 'Offer', url: stegaClean(doc.ticketUrl) || `https://barakahconnect.nl/${stegaClean(doc.slug)}#tickets`, availability: 'https://schema.org/InStock', ...(doc.date && { validThrough: stegaClean(doc.date) }) },
       }),
     },
   }

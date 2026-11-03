@@ -44,12 +44,14 @@ WhatsApp, Instagram en LinkedIn, bijvoorbeeld **barakahconnect.nl/ramadan-event*
 4. Tabblad **Programma**: één onderdeel per tijdsblok. Zet **Rustig blok** aan voor inloop en pauze.
 5. Tabblad **Locatie en tickets**: adres, praktische informatie (parkeren, OV) en de tekst boven de ticketshop.
    Gratis event? Zet **Gratis event** aan, dan staat er geen ticketshop op de pagina.
+   Verkoop je de tickets ergens anders? Plak die link bij **Eigen ticketlink**; dan staat er een knop
+   "Bestel je ticket" in plaats van de algemene ticketshop.
 6. Klik op **Publiceren**. Binnen een minuut staat de pagina online op de link die je koos.
 7. Open de bijeenkomst van dit event (onder **Bijeenkomsten**) en kies bij **Eventpagina** de pagina die je net
    maakte. De kaart op /bijeenkomsten krijgt dan de knop "Bekijk het programma".
 
 Na de datum van het event verdwijnt de ticketshop vanzelf van de pagina; de pagina zelf blijft bereikbaar tot je
-hem verwijdert.
+hem verwijdert. Verwijderen kan altijd; de knop op de kaart bij /bijeenkomsten verdwijnt dan vanzelf.
 
 ## Overige onderdelen
 

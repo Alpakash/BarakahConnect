@@ -31,7 +31,8 @@ export type EventLandingProps = {
   }[]
   program: { time: string; title: string; text?: string; audience?: Audience; muted?: boolean; list?: string[] }[]
   locationNotes: string[]
-  tickets: { show: boolean; text?: string }
+  // url: eigen ticketlink van dit event; zonder url staat de algemene Weeztix-shop op de pagina
+  tickets: { show: boolean; text?: string; url?: string }
   jsonLd?: object
 }
 
@@ -264,7 +265,18 @@ export default function EventLanding({
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className={`${HEADING} text-4xl md:text-5xl mb-4`}>Tickets</h2>
             {tickets.text && <p className="text-lg text-[#16281c]/75 mb-10">{tickets.text}</p>}
-            <WeeztixShop />
+            {tickets.url ? (
+              <a
+                href={tickets.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center bg-[#1d4a2e] hover:bg-[#163a24] text-white px-10 py-4 rounded-full font-semibold text-lg transition-colors"
+              >
+                Bestel je ticket
+              </a>
+            ) : (
+              <WeeztixShop />
+            )}
           </div>
         </section>
       )}

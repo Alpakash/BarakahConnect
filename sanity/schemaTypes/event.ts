@@ -50,6 +50,8 @@ export const eventType = defineType({
       title: 'Eventpagina (optioneel)',
       type: 'reference',
       to: [{ type: 'eventPage' }],
+      // Zwak: de eventpagina blijft te verwijderen; de kaart toont dan gewoon geen knop meer
+      weak: true,
       description: 'Heeft deze bijeenkomst een eigen eventpagina? Kies hem hier: de kaart op /bijeenkomsten krijgt dan een knop "Bekijk het programma" naar die pagina.',
     }),
   ],

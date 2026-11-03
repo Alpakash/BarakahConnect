@@ -188,6 +188,15 @@ export const eventPageType = defineType({
       description: 'Zet aan als er geen tickets nodig zijn: de ticketshop staat dan niet op de pagina.',
     }),
     defineField({
+      name: 'ticketUrl',
+      title: 'Eigen ticketlink (optioneel)',
+      type: 'url',
+      group: 'locatie',
+      description: 'Verkoop je de tickets voor dit event ergens anders (een eigen Weeztix-shop, Eventbrite)? Plak hier de link. Leeg laten: de algemene Barakah Connect-ticketshop staat op de pagina.',
+      hidden: ({ document }) => document?.isFree === true,
+      validation: (rule) => rule.uri({ scheme: ['https'] }),
+    }),
+    defineField({
       name: 'ticketsText',
       title: 'Tekst boven de ticketshop',
       type: 'string',
