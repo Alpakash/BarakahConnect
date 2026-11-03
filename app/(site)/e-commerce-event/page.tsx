@@ -181,7 +181,7 @@ const EVENT_JSON_LD = {
   image: ['https://barakahconnect.nl/events/e-commerce-event/flyer.webp'],
   organizer: { '@type': 'Organization', name: 'Barakah Connect', url: 'https://barakahconnect.nl' },
   performer: SPEAKERS.map((s) => ({ '@type': 'Person', name: s.name })),
-  offers: { '@type': 'Offer', url: 'https://barakahconnect.nl/e-commerce-event#tickets', availability: 'https://schema.org/InStock' },
+  offers: { '@type': 'Offer', url: 'https://barakahconnect.nl/e-commerce-event#tickets', availability: 'https://schema.org/InStock', validThrough: '2026-12-13T19:00:00+01:00' },
 }
 
 export default function ECommerceEvent() {
