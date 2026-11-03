@@ -52,7 +52,20 @@ export const eventType = defineType({
       to: [{ type: 'eventPage' }],
       // Zwak: de eventpagina blijft te verwijderen; de kaart toont dan gewoon geen knop meer
       weak: true,
-      description: 'Heeft deze bijeenkomst een eigen eventpagina? Kies hem hier: de kaart op /bijeenkomsten krijgt dan een knop "Bekijk het programma" naar die pagina.',
+      description: 'Heeft deze bijeenkomst een eigen eventpagina? Kies hem hier: foto en titel van de kaart op /bijeenkomsten linken dan naar die pagina, en er komt een knop "Bekijk het programma" bij.',
+    }),
+    defineField({
+      name: 'pageLink',
+      title: 'Link naar eventpagina (optioneel)',
+      type: 'string',
+      description: 'Alleen nodig als de eventpagina hierboven niet te kiezen is, bijv. "/e-commerce-event" of een volledige https-link. Een gekozen eventpagina gaat voor.',
+      hidden: ({ document }) => !!document?.eventPage,
+      validation: (rule) =>
+        rule.custom((value) =>
+          !value || /^\/[a-z0-9-/]*$/.test(value) || /^https:\/\//.test(value)
+            ? true
+            : 'Begin met "/" (bijv. "/e-commerce-event") of met "https://".'
+        ),
     }),
   ],
 })
