@@ -17,3 +17,4 @@
 - Na zondag 13 december 2026: `/e-commerce-event` opruimen. Haal de pagina weg of stuur hem door naar `/bijeenkomsten`, en haal de regel uit `app/sitemap.ts`. (Reviewtip PR #18)
 - Foto Ustadh Mohamed Akkouh: nu uit de flyer gesneden (322 px breed, op mobiel zacht). Vervangen door het originele bestand met kantoorachtergrond zodra de ontwerper dat levert.
 - Opdrachtgever laat de zelfgeschreven teksten nalezen: de omschrijvingen van Ustadh, Soufiane en Walid, de introzin "Je gaat naar huis met…" en "Businesscoach" bij Nassira.
+- Sanity: bijeenkomst 'De ondernemers event!' (13 dec) staat op 19:50 en heeft een oudere flyer; Akash past dit aan in de Studio (niet zonder akkoord in productie schrijven).

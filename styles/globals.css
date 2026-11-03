@@ -10,6 +10,21 @@
   
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+
+  /* Groen van het logo en de flyer van 13 december. De emerald-klassen van Tailwind wijzen
+     hierdoor overal op dit groen; opbouw en lettertype van de site blijven zoals ze waren. */
+  --color-emerald-50: #f1f6ea;
+  --color-emerald-100: #e3edd0;
+  --color-emerald-200: #c9dcae;
+  --color-emerald-300: #dce98f;
+  --color-emerald-400: #8fb37e;
+  --color-emerald-500: #4f8a5f;
+  --color-emerald-600: #2f6b45;
+  --color-emerald-700: #1d4a2e;
+  --color-emerald-800: #163a24;
+  --color-emerald-900: #102b1b;
+  --color-emerald-950: #0a1d12;
+
 }
 
 body {
