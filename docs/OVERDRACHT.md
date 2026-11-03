@@ -137,12 +137,16 @@ Er is geen CONTRIBUTING-bestand; dit is wat de geschiedenis laat zien:
 
 ## Openstaande punten
 
-Uit `TASKS.md`:
+Uit `TASKS.md` (kijk ook in dat bestand zelf voor de actuele stand):
 
 - Na zondag 13 december 2026: `/e-commerce-event` opruimen. Haal de pagina weg of stuur hem door naar `/bijeenkomsten`
   en haal de regel uit `app/sitemap.ts`. De ticketshop op die pagina is de algemene Weeztix-shop en blijft anders
   zichtbaar.
 
+- Foto Ustadh Mohamed Akkouh vervangen: nu uit de flyer gesneden (322 px breed, op mobiel zacht). Vervangen door het originele
+  bestand met kantoorachtergrond zodra de ontwerper dat levert.
+- De opdrachtgever laat de zelfgeschreven teksten nalezen: de omschrijvingen van Ustadh, Soufiane en Walid, de introzin
+  "Je gaat naar huis met…" en "Businesscoach" bij Nassira.
 - `README.md` bijwerken (verouderde Node-versie, placeholder-kloon-URL, verplichte `.env.local`) en laten verwijzen naar dit
   document.
 
