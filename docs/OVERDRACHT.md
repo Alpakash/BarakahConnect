@@ -1,6 +1,6 @@
 # Overdracht barakahconnect.nl
 
-Voor de nieuwe developer. Dit document beschrijft wat de site is, wat hij nodig heeft om te draaien, hoe je lokaal
+Voor de nieuwe developer (de website is van de opdrachtgever Mory van Barakah Connect; de vorige beheerder draagt het beheer over). Dit document beschrijft wat de site is, wat hij nodig heeft om te draaien, hoe je lokaal
 werkt en hoe er live gaat. Het bevat bewust geen geheimen: waarden van wachtwoorden en tokens horen in een
 wachtwoordmanager, niet in de repo.
 
@@ -21,7 +21,7 @@ naar `www`).
 | Inhoud | Sanity v5 (project `z7hlx5cz`, dataset `production`), met de Studio ingebouwd op `/studio` |
 | Styling | Tailwind CSS 4, `styled-components` voor de Studio |
 | Mail | `nodemailer` over SMTP, voor meldingen van formulieren |
-| Pakketbeheer | pnpm (Node 24.x staat ingesteld in Vercel) |
+| Pakketbeheer | pnpm; Vercel draait Node 24.x (de repo legt geen versie vast) |
 | Hosting | Vercel, project `barakah-connect` |
 
 Mappen: `app/(site)/` pagina's, `app/api/` routes, `components/`, `sanity/schemaTypes/` inhoudstypes, `sanity/studio/`
@@ -36,18 +36,20 @@ pnpm install
 pnpm dev        # http://localhost:3000, Studio op http://localhost:3000/studio
 ```
 
-Je hebt voor het meeste geen `.env.local` nodig: project-id en dataset van Sanity hebben ingebouwde standaardwaarden in
-`sanity/env.ts`. Andere commando's: `pnpm build`, `pnpm start`, `pnpm lint`. Er zijn geen geautomatiseerde tests.
+Voor de site zelf heb je geen `.env.local` nodig: project-id en dataset van Sanity hebben ingebouwde standaardwaarden in
+`sanity/env.ts`. De hulpscripts in `scripts/` hebben die standaardwaarden niet en hebben `NEXT_PUBLIC_SANITY_PROJECT_ID`
+en `NEXT_PUBLIC_SANITY_DATASET` wel nodig in `.env.local`. `README.md` is op onderdelen verouderd (Node 20+, een
+placeholder-kloon-URL, een verplichte `.env.local`); volg dit document en werk de README bij in een kleine vervolg-PR. Andere commando's: `pnpm build`, `pnpm start`, `pnpm lint`. Er zijn geen geautomatiseerde tests.
 
 ### Omgevingsvariabelen (alleen de namen)
 
 | Naam | Waarvoor | Verplicht |
 |---|---|---|
-| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Sanity-project; valt terug op `z7hlx5cz` | nee |
-| `NEXT_PUBLIC_SANITY_DATASET` | Sanity-dataset; valt terug op `production` | nee |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Sanity-project; valt terug op `z7hlx5cz` | nee voor de site, ja voor de scripts |
+| `NEXT_PUBLIC_SANITY_DATASET` | Sanity-dataset; valt terug op `production` | nee voor de site, ja voor de scripts |
 | `NEXT_PUBLIC_SANITY_API_VERSION` | API-versie; valt terug op `2024-04-20` | nee |
-| `SANITY_API_WRITE_TOKEN` | Schrijftoken (Editor). Slaat formulierinzendingen op in Sanity; ook voor de scripts. Zonder dit komen inzendingen alleen per e-mail binnen. | ja, voor formulieren |
-| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` | Mailserver voor de meldingsmail | ja, voor mail |
+| `SANITY_API_WRITE_TOKEN` | Schrijftoken (Editor). Slaat formulierinzendingen op in Sanity; ook voor de scripts. Zonder dit komen inzendingen alleen per e-mail binnen. | nee, maar zonder token komen inzendingen alleen per mail binnen |
+| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` | Mailserver voor de meldingsmail (poort standaard 465) | nee, maar zonder mail komen inzendingen alleen in Sanity |
 | `SMTP_SECURE` | `false` voor STARTTLS (poort 587); standaard `true` (poort 465) | nee |
 | `SMTP_FROM` | Afzenderadres; valt terug op `SMTP_USER` | nee |
 | `SANITY_PREVIEW_SECRET` | Optioneel slot op `/api/draft-mode/enable`. Zet dit **niet** aan zonder te testen: de Presentatie-tool in Studio stuurt dit geheim niet mee en raakt dan geblokkeerd. | nee |
@@ -56,11 +58,16 @@ In Vercel staan nu (gecontroleerd 3 nov 2026, alleen namen): `SMTP_HOST`, `SMTP_
 voor Production en Preview; `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET` en
 `SANITY_API_WRITE_TOKEN` alleen voor Production. Preview-deploys hebben dus geen schrijftoken: formulieren slaan daar
 niets op in Sanity. De waarden zijn niet uit te lezen en horen via een wachtwoordmanager van de huidige beheerder naar
-de nieuwe. `SMTP_SECURE`, `SMTP_FROM` en `SANITY_PREVIEW_SECRET` staan niet in Vercel; het mailadres waarop meldingen
+de nieuwe. `SMTP_SECURE`, `SMTP_FROM` en `SANITY_PREVIEW_SECRET` staan niet in Vercel (`SMTP_FROM` valt terug op `SMTP_USER`, daarna op `no-reply@barakahconnect.nl`); het mailadres waarop meldingen
 binnenkomen (`info@barakahconnect.nl`) staat vast in `app/api/submissions/route.ts`.
 
-Een `.env.local` voor lokaal testen van formulieren of de scripts maak je zelf met een eigen testtoken; gebruik niet
-het productietoken lokaal.
+**Er is maar één dataset (`production`).** Elk schrijftoken, ook een eigen, schrijft dus naar de live inhoud. Lokaal een
+formulier testen slaat een echte inzending op in productie, en `pnpm seed` (`scripts/seed-content.mjs`) overschrijft de
+gepubliceerde homepage (`mainHomePage`). Draai de scripts alleen bewust. Wil je veilig testen, maak dan eerst een aparte
+dataset (bijvoorbeeld `development`) en kies die met `NEXT_PUBLIC_SANITY_DATASET`.
+
+Preview-deploys hebben wel `SMTP_*`: een formulier testen op een preview-URL stuurt een echte mail naar
+`info@barakahconnect.nl`, terwijl de inzending niet in Sanity komt.
 
 ## Uitrol
 
@@ -145,10 +152,11 @@ Open pull requests op het moment van schrijven:
 
 Deze punten zijn niet vanuit de code of het openbare internet vast te stellen:
 
-1. Wie lid is van Sanity-project `z7hlx5cz`, met welke rol, en welke API-tokens, CORS-origins en webhooks er bestaan.
-2. Bij welke registrar en op wiens naam `barakahconnect.nl` staat, wanneer het verloopt en wie de DNS bij Namecheap kan
+1. Of Node 24.x in Vercel nog klopt; de repo legt geen versie vast (geen `engines`, geen `.nvmrc`).
+2. Wie lid is van Sanity-project `z7hlx5cz`, met welke rol, en welke API-tokens, CORS-origins en webhooks er bestaan.
+3. Bij welke registrar en op wiens naam `barakahconnect.nl` staat, wanneer het verloopt en wie de DNS bij Namecheap kan
    wijzigen.
-3. Welke SMTP-aanbieder achter `SMTP_HOST` zit en op wiens account.
-4. Wie de eigenaar is van het Meta-, TikTok- en Weeztix-account.
-5. Of er nog andere GitHub-apps of -webhooks aan de repo hangen (de ledenlijst van de repo toont alleen de eigenaar als
+4. Welke SMTP-aanbieder achter `SMTP_HOST` zit en op wiens account.
+5. Wie de eigenaar is van het Meta-, TikTok- en Weeztix-account.
+6. Of er nog andere GitHub-apps of -webhooks aan de repo hangen (de ledenlijst van de repo toont alleen de eigenaar als
    collaborator).
