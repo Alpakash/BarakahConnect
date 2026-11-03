@@ -145,11 +145,8 @@ Uit `TASKS.md`:
 - `README.md` bijwerken (verouderde Node-versie, placeholder-kloon-URL, verplichte `.env.local`) en laten verwijzen naar dit
   document.
 
-Open pull requests op het moment van schrijven:
-
-- PR 19, "eventpagina's die de redacteur zelf in Sanity maakt" (branch `feat/eventpaginas-sanity`), nog in review.
-  Lees de PR en beslis samen met de huidige beheerder wie hem afmaakt voordat de overdracht klaar is.
-- Een volgende PR met kleine stijlupdates is aangekondigd maar nog niet geopend.
+Pull requests: PR 19 (eventpagina's die de redacteur zelf in Sanity maakt) en PR 21 (stijlupdate) zijn gemerged; op
+moment van schrijven staat alleen deze overdracht-PR nog open. Controleer `gh pr list` voor de actuele stand.
 
 ## Nog te controleren bij de overdracht
 
