@@ -25,28 +25,30 @@ export default function EventCard({ event }: { event: any }) {
   const isFree = event.isFree === true || /\bgratis\b/i.test(title);
 
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all border border-stone-100 group flex flex-col h-full">
-      <div className="h-52 w-full relative bg-stone-100 overflow-hidden">
+    <div className="bg-white rounded-3xl overflow-hidden border border-stone-100 shadow-[0_2px_10px_-3px_rgba(22,40,28,0.08)] hover:shadow-[0_20px_50px_-25px_rgba(22,40,28,0.35)] transition-shadow group flex flex-col h-full">
+      <div className="aspect-[4/5] w-full relative bg-emerald-50 overflow-hidden">
         {event.image ? (
           <Image 
-            src={urlFor(event.image).width(600).height(400).url()} 
+            src={urlFor(event.image).width(800).url()} 
             alt={event.title}
             fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+            className="object-contain"
           />
         ) : (
-          <div className="absolute inset-0 bg-emerald-800/5 flex items-center justify-center text-emerald-800/30">
+          <div className="absolute inset-0 flex items-center justify-center text-emerald-700/40">
             <CalendarIcon className="w-14 h-14" />
           </div>
         )}
-        <div className="absolute top-4 left-4 bg-white/95 backdrop-blur px-4 py-1.5 rounded text-xs font-bold tracking-wide text-emerald-800 shadow-sm uppercase">
-          {isTBD ? 'Binnenkort' : 'Gepland'}
-        </div>
       </div>
-      
-      <div className="p-6 flex flex-col flex-grow">
-        <h3 className="font-serif text-2xl font-medium text-stone-900 mb-3 group-hover:text-emerald-700 transition-colors">{event.title}</h3>
-        <p className="text-stone-500 text-sm flex items-center gap-2 mb-3">
+
+      <div className="p-7 flex flex-col flex-grow">
+        {/* Label boven de titel, niet over de flyer heen */}
+        <span className="self-start bg-emerald-700 px-3 py-1 rounded-full text-xs font-semibold tracking-wide text-lime uppercase mb-4">
+          {isTBD ? 'Binnenkort' : 'Gepland'}
+        </span>
+        <h3 className="font-serif text-2xl font-medium text-stone-900 mb-4 leading-snug">{event.title}</h3>
+        <p className="text-stone-500 text-sm flex items-center gap-2 mb-2">
           <ClockIcon className="w-4 h-4 text-emerald-700 shrink-0" /> <span className="capitalize">{dateStr}</span>
         </p>
         {event.location && (
@@ -60,9 +62,17 @@ export default function EventCard({ event }: { event: any }) {
            </p>
         )}
         
+        {event.eventPageSlug && (
+          <Link
+            href={`/${stegaClean(event.eventPageSlug)}`}
+            className="inline-flex items-center justify-center w-full bg-lime hover:bg-emerald-200 text-emerald-900 font-semibold py-3 rounded-full transition-colors mb-3"
+          >
+            Bekijk het programma
+          </Link>
+        )}
         <Link 
           href={`/aanmelden?event=${encodeURIComponent(title)}${isFree ? '&gratis=1' : ''}`} 
-          className="inline-flex items-center justify-center w-full bg-stone-50 hover:bg-emerald-700 text-emerald-700 hover:text-white font-medium py-3 rounded border border-emerald-100/50 hover:border-emerald-700 transition-all mt-auto tracking-wide content-end"
+          className="inline-flex items-center justify-center w-full border-2 border-emerald-700 text-emerald-700 hover:bg-emerald-700 hover:text-white font-semibold py-3 rounded-full transition-colors mt-auto"
         >
           Meld je aan
         </Link>
