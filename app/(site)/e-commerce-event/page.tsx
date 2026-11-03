@@ -41,8 +41,9 @@ const SPEAKERS = [
     role: 'Islamitische Finance & E-commerce',
     topic: 'E-commerce en dropshipping: wat is halal en wat is haram?',
     text: 'Ustadh Mohamed Akkouh opent het gezamenlijke programma. Hij bespreekt e-commerce en dropshipping vanuit de islamitische regels rond handel en financiën. Na zijn lezing is er ruimte voor jullie vragen.',
-    photo: '/events/e-commerce-event/mohamed-akkouh.webp',
-    position: '50% 35%',
+    // Uitgesneden uit de flyer: dezelfde foto met kantoorachtergrond
+    photo: '/events/e-commerce-event/mohamed-akkouh.jpg',
+    position: '50% 70%',
     panel: 'bg-white',
   },
   {
