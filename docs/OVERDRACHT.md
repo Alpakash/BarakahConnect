@@ -142,6 +142,9 @@ Uit `TASKS.md`:
   en haal de regel uit `app/sitemap.ts`. De ticketshop op die pagina is de algemene Weeztix-shop en blijft anders
   zichtbaar.
 
+- `README.md` bijwerken (verouderde Node-versie, placeholder-kloon-URL, verplichte `.env.local`) en laten verwijzen naar dit
+  document.
+
 Open pull requests op het moment van schrijven:
 
 - PR 19, "eventpagina's die de redacteur zelf in Sanity maakt" (branch `feat/eventpaginas-sanity`), nog in review.
