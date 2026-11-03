@@ -40,12 +40,13 @@ export default function EventCard({ event }: { event: any }) {
             <CalendarIcon className="w-14 h-14" />
           </div>
         )}
-        <div className="absolute top-4 left-4 bg-emerald-700 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide text-emerald-300 uppercase shadow-sm">
-          {isTBD ? 'Binnenkort' : 'Gepland'}
-        </div>
       </div>
-      
+
       <div className="p-7 flex flex-col flex-grow">
+        {/* Label boven de titel, niet over de flyer heen */}
+        <span className="self-start bg-emerald-700 px-3 py-1 rounded-full text-xs font-semibold tracking-wide text-lime uppercase mb-4">
+          {isTBD ? 'Binnenkort' : 'Gepland'}
+        </span>
         <h3 className="font-serif text-2xl font-medium text-stone-900 mb-4 leading-snug">{event.title}</h3>
         <p className="text-stone-500 text-sm flex items-center gap-2 mb-2">
           <ClockIcon className="w-4 h-4 text-emerald-700 shrink-0" /> <span className="capitalize">{dateStr}</span>
@@ -64,7 +65,7 @@ export default function EventCard({ event }: { event: any }) {
         {event.eventPageSlug && (
           <Link
             href={`/${stegaClean(event.eventPageSlug)}`}
-            className="inline-flex items-center justify-center w-full bg-emerald-300 hover:bg-emerald-200 text-emerald-900 font-semibold py-3 rounded-full transition-colors mb-3"
+            className="inline-flex items-center justify-center w-full bg-lime hover:bg-emerald-200 text-emerald-900 font-semibold py-3 rounded-full transition-colors mb-3"
           >
             Bekijk het programma
           </Link>

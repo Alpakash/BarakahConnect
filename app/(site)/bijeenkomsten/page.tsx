@@ -30,7 +30,7 @@ export default async function Bijeenkomsten() {
     <div className="py-20 md:py-24 bg-stone-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="text-center mb-5">
-          <span className="inline-block bg-emerald-700 text-emerald-300 text-sm font-semibold px-4 py-1.5 rounded-full">Agenda</span>
+          <span className="inline-block bg-emerald-700 text-lime text-sm font-semibold px-4 py-1.5 rounded-full">Agenda</span>
         </p>
         <h1 className="font-serif text-4xl md:text-6xl mb-6 text-stone-900 text-center">{pageTitle}</h1>
         <p className="text-center text-stone-500 mb-14 max-w-2xl mx-auto text-lg leading-relaxed">

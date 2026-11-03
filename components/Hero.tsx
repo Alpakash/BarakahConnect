@@ -42,7 +42,7 @@ export default function Hero({
           {subtitle && (
             <>
               <br />
-              <span className="text-emerald-300">{subtitle}</span>
+              <span className="text-lime">{subtitle}</span>
             </>
           )}
         </h1>
